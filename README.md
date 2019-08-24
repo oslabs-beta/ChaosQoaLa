@@ -1,2 +1,2 @@
-# ChaosQL
+# ChaosQoaLa
 Chaos Engineering meets ChaosQL
