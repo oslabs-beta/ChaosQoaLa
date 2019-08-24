@@ -1,0 +1,27 @@
+{
+  "name": "chaos-qoala-agent",
+  "version": "0.0.1",
+  "description": "Chaos QoaLa Agent - for use on a GraphQL server in conjunction with Chaos QoaLa Controller client app",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --config ./tests/jest.config.js"
+  },
+  "author": "tasselwobegong.com",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.2.0",
+    "zlib": "^1.0.5"
+  },
+  "devDependencies": {
+    "eslint": "^6.2.1",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^22.15.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "jest": "^24.9.0"
+  }
+}
