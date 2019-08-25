@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npm link chaos-qoala-agent && jest --config ./tests/jest.config.js"
+    "test": "npm link chaos-qoala-agent && jest --config ./tests/jest.config.js --runInBand"
   },
   "keywords": [],
   "author": "",

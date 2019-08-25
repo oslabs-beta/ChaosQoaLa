@@ -5,9 +5,11 @@ const path = require('path');
 const fs = require('fs');
 
 module.exports = {
-
   gqlserver: undefined,
+
   port: 4000,
+
+  chaosSocketServer: undefined,
 
   start() {
     // get gql test schema definition
@@ -26,8 +28,10 @@ module.exports = {
 
     // 🐨 🐨 🐨 🐨 🐨 🐨 🐨 🐨 🐨
     // eslint-disable-next-line import/no-unresolved
-    const chaos = require('chaos-qoala-agent');
+    // eslint-disable-next-line import/no-extraneous-dependencies
+    const { chaos, chaosSocketServer } = require('chaos-qoala-agent');
     app.use(chaos);
+    this.chaosSocketServer = chaosSocketServer;
     // 🐨 🐨 🐨 🐨 🐨 🐨 🐨 🐨 🐨
 
     apollo.applyMiddleware({ app }); // app is from an existing express app
@@ -38,6 +42,9 @@ module.exports = {
   },
 
   stop() {
+    // we need to close the chaos socket server for a clean exit
+    this.chaosSocketServer.close();
+    // then close the gql server
     this.gqlserver.close();
   },
 };
