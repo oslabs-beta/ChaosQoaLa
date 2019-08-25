@@ -1,6 +1,6 @@
 const config = {
   blastRadius: 1.0,
-  delay: 10000,
+  delay: 2000,
   missingData: true,
 };
 
