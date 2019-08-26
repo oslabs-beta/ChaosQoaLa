@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npm link chaos-qoala-agent && jest --config ./tests/jest.config.js --runInBand"
+    "test": "npm link chaos-qoala-agent && jest --config ./tests/jest.config.js --runInBand",
+    "steadystate": "nodemon ./steady-state-server-stub/server.js"
   },
   "keywords": [],
   "author": "",
@@ -18,15 +19,17 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.7.0",
-    "jest": "^24.9.0"
+    "jest": "^24.9.0",
+    "nodemon": "^1.19.1"
   },
   "dependencies": {
-    "socket.io-client": "^2.2.0",
     "apollo-server-express": "^2.8.2",
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
     "graphql": "^14.4.2",
     "node-fetch": "^2.6.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "random-js": "^2.1.0",
+    "socket.io-client": "^2.2.0"
   }
 }
