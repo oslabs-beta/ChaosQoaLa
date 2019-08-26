@@ -1,7 +1,6 @@
 const fetch = require('node-fetch');
-// apollo with chaos agent embedded
 const io = require('socket.io-client');
-// express with chaos agent embedded
+// apollp with chaos agent embedded
 const apollo = require('./platforms/apollo-server-express-app');
 // import chaos config file - TODO: remove once controler has command line mode
 const config = require('../chaos-qoala-config');
@@ -11,7 +10,7 @@ const platform = apollo;
 // increase default jest timeout as our tests intentionally add latency
 jest.setTimeout(30000);
 
-// start platform servers at before testing
+// start platform server before testing
 beforeAll(async (done) => {
   await platform.start();
   const socket = await io.connect('http://localhost:80');
@@ -27,7 +26,6 @@ beforeAll(async (done) => {
 describe('Chaos 🐨  Proof of Concept', () => {
   // note the async so we can await fetch
   test('change response data', async (done) => {
-    // second arg here is config file -->
 
     // construct url
     const url = `http://localhost:${platform.port}/graphql`;
@@ -62,7 +60,7 @@ describe('Chaos 🐨  Proof of Concept', () => {
   });
 });
 
-// stop platform servers at end of all tests
+// stop platform server at end of all tests
 afterAll(async (done) => {
   await platform.stop();
   done();

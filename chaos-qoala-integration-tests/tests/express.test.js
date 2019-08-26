@@ -1,5 +1,4 @@
 const fetch = require('node-fetch');
-// apollo with chaos agent embedded
 const io = require('socket.io-client');
 // express with chaos agent embedded
 const express = require('./platforms/express-graphql-app');
@@ -11,7 +10,7 @@ const platform = express;
 // increase default jest timeout as our tests intentionally add latency
 jest.setTimeout(30000);
 
-// start platform servers at before testing
+// start platform server before testing
 beforeAll(async (done) => {
   await platform.start();
   const socket = await io.connect('http://localhost:80');
@@ -27,8 +26,6 @@ beforeAll(async (done) => {
 describe('Chaos 🐨  Proof of Concept', () => {
   // note the async so we can await fetch
   test('change response data', async (done) => {
-    // second arg here is config file -->
-
     // construct url
     const url = `http://localhost:${platform.port}/graphql`;
 
