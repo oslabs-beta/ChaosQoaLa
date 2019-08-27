@@ -31,7 +31,7 @@ describe('Chaos 🐨  Proof of Concept', () => {
 
     // gql query
     const query = {
-      query: '{ message }',
+      query: '{ dontKnockMeOut, knockMeOut }',
       variables: null,
     };
 
@@ -49,7 +49,8 @@ describe('Chaos 🐨  Proof of Concept', () => {
 
     // expect the correct injection via chaos middleware
     const json = await response.json();
-    expect(json.data.message).toBe('Hello Chaos QoaLa Injected This');
+    expect(json.data.dontKnockMeOut).toBe('I should NOT be knocked out by Chaos QoaLa');
+    expect(json.data.knockMeOut).toBe(undefined);
 
     // check time is within 3 seconds of the configured delay
     const THREE_SECONDS_IN_MS = 3000;

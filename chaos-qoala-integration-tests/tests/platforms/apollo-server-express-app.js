@@ -19,7 +19,8 @@ module.exports = {
     // Provide resolver functions for your schema fields
     const resolvers = {
       Query: {
-        message: () => 'Hello',
+        knockMeOut: () => 'I should be knocked out by Chaos QoaLa',
+        dontKnockMeOut: () => 'I should NOT be knocked out by Chaos QoaLa',
       },
     };
 

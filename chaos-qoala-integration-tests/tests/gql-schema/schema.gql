@@ -1,5 +1,6 @@
 type Query{
-  message: String
+  dontKnockMeOut: String
+  knockMeOut: String
 }
 
 schema {
