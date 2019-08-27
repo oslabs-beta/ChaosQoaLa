@@ -3,4 +3,5 @@
 module.exports = {
   ...require('./configure'),
   ...require('./start'),
+  ...require('./send'),
 };

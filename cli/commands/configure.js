@@ -6,7 +6,7 @@ const packageJSON = join(__dirname, '..', 'package.json');
 const configFile = require(packageJSON);
 
 
-// saves the conifguration for future use
+/* Saves the users' questions in the package.json file */
 function configure(state) {
   configFile.chaosQoala = {
     ...state,
@@ -22,25 +22,22 @@ function askQuestions(answers) {
   configure({ questions: answers });
 }
 
-// LOOK AT GRABBING THE PACKAGE AFTER THE PACKAGE IS READ
-// look at renaming the properties in state
+/* **LOOK AT GRABBING THE PACKAGE AFTER THE PACKAGE IS READ
+As of write now, the state is being read before the answers
+are submitted, so the users' input is not being shown
+in the terminal */
+/* This function reads the local file path */
+/* This function may no longer be necessary */
 function read() {
   const { configQuestions = {} } = configFile;
-  const {
-    questions = [], state = {
-      socket: '',
-      blastRadius: '',
-      delay: '',
-      missingData: '',
-      runTime: '',
-    },
-  } = configQuestions;
+  const { questions = [], state = {} } = configQuestions;
   return {
     questions,
     state,
   };
 }
 
+/* This function saves the updated config file */
 function save(state) {
   const { configQuestions = {} } = configFile;
   configure({ ...configQuestions, state: { ...configQuestions.state, ...state } });

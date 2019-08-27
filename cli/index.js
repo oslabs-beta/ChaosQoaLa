@@ -19,11 +19,17 @@ program
   .description('Initiate a config file')
   .action(start);
 
+// program
+//   .command('send')
+//   .description('Send the information to the ChaosQoala agent')
+//   .action(send);
+
 program
   // .description(description)
   // .version(version, '-v, --version')
   .parse(process.argv);
 
-if (!process.argv.slice(2).lenght) {
+
+if (!process.argv.slice(2).length) {
   program.outputHelp();
 }
