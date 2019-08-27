@@ -11,11 +11,11 @@ const platform = apollo;
 jest.setTimeout(30000);
 
 // start platform server before testing
-beforeAll(async (done) => {
-  await platform.start();
-  const socket = await io.connect('http://localhost:80');
+beforeAll((done) => {
+  platform.start();
+  const socket = io.connect('http://localhost:80');
   // define event handler for sucessfull connection
-  await socket.on('connect', () => {
+  socket.on('connect', () => {
     socket.emit('eucalyptus', config, () => {
       done();
     });
@@ -25,8 +25,7 @@ beforeAll(async (done) => {
 // test altering basic query response
 describe('Chaos 🐨  Proof of Concept', () => {
   // note the async so we can await fetch
-  test('change response data', async (done) => {
-
+  test('change response data', async () => {
     // construct url
     const url = `http://localhost:${platform.port}/graphql`;
 
@@ -40,28 +39,27 @@ describe('Chaos 🐨  Proof of Concept', () => {
     const startTimeInMS = performance.now();
 
     // note we await the fetch to stop jest moving on
-    await fetch(url, {
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(query),
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        expect(json.data.message).toBe('Hello Chaos QoaLa Injected This');
-        // check time is within 3 seconds of the configured delay
-        const THREE_SECONDS_IN_MS = 3000;
-        const timeTakenInMS = performance.now() - startTimeInMS;
-        expect(timeTakenInMS).toBeGreaterThan(config.delay);
-        expect(timeTakenInMS).toBeLessThan(config.delay + THREE_SECONDS_IN_MS);
-        done();
-      });
+    });
+
+    // expect the correct injection via chaos middleware
+    const json = await response.json();
+    expect(json.data.message).toBe('Hello Chaos QoaLa Injected This');
+
+    // check time is within 3 seconds of the configured delay
+    const THREE_SECONDS_IN_MS = 3000;
+    const timeTakenInMS = performance.now() - startTimeInMS;
+    expect(timeTakenInMS).toBeGreaterThan(config.delay);
+    expect(timeTakenInMS).toBeLessThan(config.delay + THREE_SECONDS_IN_MS);
   });
 });
 
 // stop platform server at end of all tests
-afterAll(async (done) => {
-  await platform.stop();
-  done();
+afterAll(() => {
+  platform.stop();
 });
