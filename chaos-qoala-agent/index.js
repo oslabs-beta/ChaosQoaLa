@@ -9,6 +9,7 @@ const zlib = require('zlib');
 
 let DELAY_RESPONSE_MS = 0;
 let REQUESTS_SO_FAR = 0;
+let QUERY_TARGETS;
 let ensueChaos = false;
 const app = require('express')();
 const chaosSocketServer = require('http').Server(app);
@@ -20,9 +21,11 @@ io.on('connection', (socket) => {
   socket.on('eucalyptus', (config, acknowledge) => {
     const { delay } = config;
     const { blastRadius } = config;
+    const { affectedQueries } = config;
     const chaosChance = Math.random();
     if (chaosChance < blastRadius) ensueChaos = true;
     DELAY_RESPONSE_MS = ensueChaos === true ? delay : 0;
+    QUERY_TARGETS = ensueChaos === true ? affectedQueries : {};
     acknowledge();
   });
 });
@@ -91,8 +94,13 @@ const chaos = modifyRes((content, req, res) => {
     const data = JSON.parse(content.toString());
     const ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
     REQUESTS_SO_FAR += 1;
-    if (ensueChaos === true) { data.data.message += ' Chaos QoaLa Injected This'; } else {
-      data.data.message += `Chaos-less Response, IP of client = ${ip}. Total requests so far = ${REQUESTS_SO_FAR}`;
+    if (ensueChaos === true) {
+      // get list of keys in the data object returned by the query
+      const dataSectionsOfResults = Object.keys(data.data);
+      dataSectionsOfResults.forEach(((name) => {
+        // if a data section is on the knock out list remove the data from the response
+        if (QUERY_TARGETS[name]) delete data.data[name];
+      }));
     }
     return Buffer.from(JSON.stringify(data));
   } catch (err) {

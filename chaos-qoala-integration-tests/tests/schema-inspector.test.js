@@ -11,9 +11,9 @@ describe('Schema Inspector', () => {
   test('basic test', async () => {
     const url = `http://localhost:${platform.port}/graphql`;
     const inspector = new QueryInspector(url);
-    await inspector.hydrateQueryList();
-    const queryList = inspector.getQueryList();
-    expect(queryList.join()).toBe('message');
+    await inspector.hydrateQueryMap();
+    const queryList = inspector.getQueryMap();
+    expect(Object.keys(queryList).join()).toBe('dontKnockMeOut,knockMeOut');
   });
 });
 

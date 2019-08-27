@@ -3,11 +3,11 @@ const fetch = require('node-fetch');
 class QueryInspector {
   constructor(uri) {
     this.uri = uri;
-    this.queryList = [];
+    this.queryMap = {};
   }
 
   // returns the count of querys found in the schema
-  async hydrateQueryList() {
+  async hydrateQueryMap() {
     const queryToGetAllQueryNames = '{__schema{queryType{fields{name}}}}';
     const query = { query: queryToGetAllQueryNames, variables: null };
 
@@ -22,15 +22,20 @@ class QueryInspector {
 
     // eslint-disable-next-line no-underscore-dangle
     responseJson.data.__schema.queryType.fields.forEach((element) => {
-      this.queryList.push(element.name);
+      // add query as key in an object - the boolean represents
+      // if the data returned from the query will potentially be
+      // affected due to user preferences in the chaos config
+      // for the moment we don't have access to those preferences
+      // so just initialize to false
+      this.queryMap[element.name] = false;
     });
 
-    return this.queryList.length;
+    return Object.keys(this.queryMap).length;
   }
 
   // returns the list of available queries once the hydrate function has been called
-  getQueryList() {
-    return this.queryList;
+  getQueryMap() {
+    return this.queryMap;
   }
 }
 
