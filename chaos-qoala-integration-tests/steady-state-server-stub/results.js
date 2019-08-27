@@ -1,6 +1,13 @@
 const { MersenneTwister19937, integer } = require('random-js');
 
-const getResults = (baseline, lowerVariance, upperVariance, startDate, endDate, resultsPerSecond) => {
+const getResults = (
+  baseline,
+  lowerVariance,
+  upperVariance,
+  startDate,
+  endDate,
+  resultsPerSecond,
+) => {
   // results container
   const results = [];
 

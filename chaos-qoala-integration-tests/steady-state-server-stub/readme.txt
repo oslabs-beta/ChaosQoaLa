@@ -4,7 +4,7 @@
 
 #default port is 7766
 
-#start the test run (assume your machine uses an IP of 192.168.0.85):
+#start the test run (example below assumes your machine has an IP of 192.168.0.85):
 
   PUT http://192.168.0.85:7766/steadystate/start
 

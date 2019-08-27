@@ -29,12 +29,14 @@ app.get('/steadystate/stop/:baseline/:lowerVariance/:upperVariance/:resultsPerSe
     stopTime,
     resultsPerSecond,
   ));
-  // reset start time
+  // reset start time so that we can do a clean start/stop cycle
+  // on the next iteration of testing
   startTimeGlobal = undefined;
   return undefined;
 });
 
 app.listen(PORT, () => {
+  // eslint-disable-next-line no-console
   console.log(`📉 steady state service ready at localhost:${PORT}/steadystate/`);
 });
 
