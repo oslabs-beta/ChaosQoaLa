@@ -1,8 +1,9 @@
-const figlet = require('figlet')
-const chalk = require ('chalk');
+/* eslint-disable no-console */
+import { textSync } from 'figlet';
+import { magentaBright } from 'chalk';
 
 console.log(
-    chalk.magentaBright(
-        figlet.textSync('ChaosQoaLa', { horizontalLayout: 'full'})
-    )
+  magentaBright(
+    textSync('ChaosQoaLa', { horizontalLayout: 'full' }),
+  ),
 );

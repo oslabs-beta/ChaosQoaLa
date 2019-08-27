@@ -1,21 +1,23 @@
-const { questions: questionsFile } = require('../package.json');
+/* eslint-disable no-console */
+import { promisify } from 'util';
+import { get as _get, start as _start } from 'prompt';
+import { questions as questionsFile } from '../package.json';
+
 const questions = require(questionsFile);
 
-const { promisify } = require('util');
-const prompt = require('prompt');
-const get = promisify(prompt.get);
+const get = promisify(_get);
 
 function start() {
-    prompt.start()
+  _start();
 
-    get(
-        questions
-          .map(({question}, i) => ({name: `${i}`, description: question }))
-    )
-          .then((result) =>{
-            console.log('Thank you for your input:')
-            console.log(JSON.stringify(result))
-        })
-};
+  get(
+    questions
+      .map(({ question }, i) => ({ name: `${i}`, description: question })),
+  )
+    .then((result) => {
+      console.log('Thank you for your input:');
+      console.log(JSON.stringify(result));
+    });
+}
 
-module.exports = start
+export default start;
