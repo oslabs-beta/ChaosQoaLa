@@ -15,7 +15,7 @@ const app = require('express')();
 const chaosSocketServer = require('http').Server(app);
 const io = require('socket.io')(chaosSocketServer);
 
-chaosSocketServer.listen(80);
+chaosSocketServer.listen(1025);
 
 io.on('connection', (socket) => {
   socket.on('eucalyptus', (config, acknowledge) => {
@@ -93,6 +93,12 @@ const chaos = modifyRes((content, req, res) => {
   try {
     const data = JSON.parse(content.toString());
     const ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
+    const agentData = {
+      timeOfResponse: new Date().toJSON(),
+      chaosResponse: ensueChaos
+    };
+    // testing emit method (data successfully being received by apollo.test.js & express.test.js)
+    io.emit('eucalyptus', agentData );
     REQUESTS_SO_FAR += 1;
     if (ensueChaos === true) {
       // get list of keys in the data object returned by the query

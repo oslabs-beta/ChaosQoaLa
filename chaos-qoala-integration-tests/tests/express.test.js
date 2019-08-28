@@ -7,18 +7,24 @@ const config = require('../chaos-qoala-config');
 // get express config
 const platform = express;
 
+let agentDataReceived = false;
+
 // increase default jest timeout as our tests intentionally add latency
 jest.setTimeout(30000);
 
 // start platform server before testing
 beforeAll((done) => {
   platform.start();
-  const socket = io.connect('http://localhost:80');
+  const socket = io.connect('http://localhost:1025');
   // define event handler for sucessfull connection
   socket.on('connect', async () => {
     socket.emit('eucalyptus', config, () => {
       done();
     });
+  });
+  // testing some code here (to see if agent data is received from index.js--->tests passing sucessfully)
+  socket.on('eucalyptus', (agentData) => {
+    agentDataReceived = true;
   });
 });
 
@@ -57,6 +63,7 @@ describe('Chaos 🐨  Proof of Concept', () => {
     const timeTakenInMS = performance.now() - startTimeInMS;
     expect(timeTakenInMS).toBeGreaterThan(config.delay);
     expect(timeTakenInMS).toBeLessThan(config.delay + THREE_SECONDS_IN_MS);
+    expect(agentDataReceived).toBe(true);
   });
 });
 
