@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npm link chaos-qoala-agent && jest --config ./tests/jest.config.js --runInBand",
+    "test": "npm link chaos-qoala-agent && jest --config ./tests/jest.config.js --runInBand --detectOpenHandles",
     "steadystate": "nodemon ./steady-state-server-stub/server.js"
   },
   "keywords": [],

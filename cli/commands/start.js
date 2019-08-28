@@ -14,7 +14,7 @@ function start() {
   const parsedMyPackageJSON = JSON.parse(myPackageJSON);
   const { state } = parsedMyPackageJSON.chaosQoala;
   state.ensueChaos = true;
-  // console.log(state);
+  console.log(state);
   const { socketPort } = state;
   const socket = io.connect(socketPort);
   socket.on('connect', () => {
