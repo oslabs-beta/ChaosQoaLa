@@ -30,7 +30,8 @@ module.exports = {
 
     // Root resolver
     const root = {
-      message: () => 'Hello',
+      knockMeOut: () => 'I should be knocked out by Chaos QoaLa',
+      dontKnockMeOut: () => 'I should NOT be knocked out by Chaos QoaLa',
     };
 
     app.use('/graphql', expressGraphQL({
