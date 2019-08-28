@@ -4,25 +4,25 @@ const program = require('commander');
 
 const { description, version } = require('./package.json');
 
-const { configure, start, send } = require('./commands/commandsexports');
+const { initialize, configure, start, } = require('./commands/commandsexports');
 
 program
-  .command('configure')
-  .description('Configure your ChaosQoala')
+  .command('initalize')
+  .description('Initalize your ChaosQoala')
   .action((url) => {
     configure({ questions: require('./questions/questions') });
   });
 
 program
 // defines a new command and how the command will be executed as well as what text the user will see
-  .command('start')
+  .command('configure')
   .description('Initiate a config file')
-  .action(start);
+  .action(configure);
 
 program
-  .command('send')
+  .command('start')
   .description('Send the information to the ChaosQoala agent')
-  .action(send);
+  .action(start);
 
 program
   // .description(description)

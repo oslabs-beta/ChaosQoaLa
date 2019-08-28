@@ -18,10 +18,10 @@ chaosSocketServer.listen(80);
 
 io.on('connection', (socket) => {
   socket.on('eucalyptus', (config, acknowledge) => {
+    ensueChaos = config.ensueChaos;
     const { delay } = config;
     const { blastRadius } = config;
-    const chaosChance = Math.random();
-    if (chaosChance < blastRadius) ensueChaos = true;
+  
     DELAY_RESPONSE_MS = ensueChaos === true ? delay : 0;
     acknowledge();
   });
@@ -85,6 +85,7 @@ const modifyRes = function (modify) {
     if (next) next();
   };
 };
+
 
 const chaos = modifyRes((content, req, res) => {
   try {

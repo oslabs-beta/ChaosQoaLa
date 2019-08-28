@@ -1,8 +1,13 @@
 module.exports = [{
   type: 'input',
-  name: 'socketioport',
-  message: 'Please enter the Socket.io port over which you will be sending the ChaosQoala',
+  name: 'socketPort',
+  message: 'Please enter the URI of the Socket.io port over which Chaos will be sent and received',
 }, {
+  type: 'input',
+  name: 'graphQLPort',
+  message: 'Please enter the UR of GraphQL service'
+},
+{
   type: 'number',
   name: 'blastRadius',
   message: 'Please enter your desired blast radius',
