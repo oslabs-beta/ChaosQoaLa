@@ -1,23 +1,26 @@
-/* eslint-disable no-console */
-import { promisify } from 'util';
-import { get as _get, start as _start } from 'prompt';
-import { questions as questionsFile } from '../package.json';
+/* ******THIS FILE SEEMS TO BE SUPERFLOUS CODE AND WILL LIKELY BE ABLE TO BE DELETED ***** */
 
-const questions = require(questionsFile);
+// /* eslint-disable no-console */
+// import { promisify } from 'util';
+// import { get as _get, start as _start } from 'prompt';
+// import { questions as questionsFile } from '../package.json';
 
-const get = promisify(_get);
+// const questions = require(questionsFile);
 
-function start() {
-  _start();
+// const get = promisify(_get);
 
-  get(
-    questions
-      .map(({ question }, i) => ({ name: `${i}`, description: question })),
-  )
-    .then((result) => {
-      console.log('Thank you for your input:');
-      console.log(JSON.stringify(result));
-    });
-}
+// function start() {
+//   _start();
 
-export default start;
+//   get(
+//     questions
+//       .map(({ question }, i) => ({ name: `${i}`, description: question })),
+//   )
+//     .then((result) => {
+//       console.log('*****YOU ARE IN THE START PROMPT********')
+//       console.log('Thank you for your input:');
+//       console.log(JSON.stringify(result));
+//     });
+// }
+
+// export default start;

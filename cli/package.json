@@ -14,50 +14,23 @@
   "dependencies": {
     "chalk": "^2.4.2",
     "commander": "^3.0.0",
+    "express": "^4.17.1",
     "figlet": "^1.2.3",
     "fs": "0.0.1-security",
+    "http": "0.0.0",
     "inquirer": "^7.0.0",
     "prompt": "^1.0.0",
-    "save": "^2.4.0"
-  },
-  "chaosqoala": {
-    "questions": [
-      {
-        "type": "input",
-        "name": "socketioport",
-        "message": "Please enter the Socket.io port over which you will be sending the ChaosQoala"
-      },
-      {
-        "type": "number",
-        "name": "blastRadius",
-        "message": "Please enter your desired blast radius",
-        "default": "Math.random()"
-      },
-      {
-        "type": "number",
-        "name": "delay",
-        "message": "Please enter the amount of time you would like your data to be dealyed (in milliseconds)"
-      },
-      {
-        "type": "boolean",
-        "name": "missingData",
-        "message": "Please enter the percentage of results you would like missing from your GQL queries"
-      },
-      {
-        "type": "number",
-        "name": "runTime",
-        "message": "Please enter how long you would like the ChaosQoala to run (in minutes). **NOTE: The 'default' runtime is 1 hour",
-        "default": "60"
-      }
-    ]
+    "save": "^2.4.0",
+    "socket.io": "^2.2.0"
   },
   "chaosQoala": {
     "state": {
-      "0": "3000",
-      "1": "0.5",
-      "2": "2000",
-      "3": "0.5",
-      "4": "60"
+      "socketPort": "http://localhost:1025",
+      "graphQLPort": "http://localhost:3000",
+      "blastRadius": "0.3",
+      "delay": "2000",
+      "missingData": "true",
+      "runTime": "60"
     }
   }
 }

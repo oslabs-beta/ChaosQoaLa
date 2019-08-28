@@ -5,7 +5,7 @@ const io = require('socket.io-client');
 const packageJSON = join(__dirname, '..', 'package.json');
 
 /* The below function reads the package.json file and grabs the state from the chaosQa  */
-function start() {
+function stop() {
   // console.log(state);
   const myPackageJSON = readFileSync(
     packageJSON,
@@ -13,8 +13,8 @@ function start() {
   );
   const parsedMyPackageJSON = JSON.parse(myPackageJSON);
   const { state } = parsedMyPackageJSON.chaosQoala;
-  state.ensueChaos = true;
-  console.log(state);
+  state.ensueChaos = false;
+  // console.log(state);
   const { socketPort } = state;
   const socket = io.connect(socketPort);
   socket.on('connect', () => {
