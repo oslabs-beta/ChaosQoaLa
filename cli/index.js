@@ -4,7 +4,7 @@ const program = require('commander');
 
 const { description, version } = require('./package.json');
 
-const { configure, start } = require('./commands/commandsexports');
+const { configure, start, send } = require('./commands/commandsexports');
 
 program
   .command('configure')
@@ -19,10 +19,10 @@ program
   .description('Initiate a config file')
   .action(start);
 
-// program
-//   .command('send')
-//   .description('Send the information to the ChaosQoala agent')
-//   .action(send);
+program
+  .command('send')
+  .description('Send the information to the ChaosQoala agent')
+  .action(send);
 
 program
   // .description(description)

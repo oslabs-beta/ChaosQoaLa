@@ -11,6 +11,12 @@ const { read, save } = configure;
 let { questions } = read();
 const { state: answered } = read();
 
+/* Declaring a variable and initialziing it to null. 
+This will variable will be set to the results of 
+the user answering the questions and it will be 
+passed to the send function to connect to the socket*/
+let userAnswers = null;
+
 questions = require('../questions/questions')
   .map(({ message }, i) => ({
     message,
@@ -37,10 +43,12 @@ function start() {
   prompt(questions)
     .then((result) => {
       save(result);
+      userAnswers = result;
       console.log(`Your answers: ${JSON.stringify(result)}`);
     });
 }
 
 module.exports = {
   start,
+  userAnswers,
 };
