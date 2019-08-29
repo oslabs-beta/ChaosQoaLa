@@ -2,6 +2,7 @@ const { readFileSync, appendFileSync } = require("fs");
 const { join } = require("path");
 const io = require("socket.io-client");
 const ALL_AGENT_DATA = [];
+let FILE_TIMESTAMP = null;
 
 const packageJSON = join(__dirname, "..", "package.json");
 
@@ -15,7 +16,12 @@ function start() {
   // Establishes a ensueChaos property on the state that will be set to
   state.ensueChaos = true;
   console.log(state);
-  appendFileSync("results.log", JSON.stringify(state));
+  // creates restult file with current time stamp. Appends file with chaos config from state
+  FILE_TIMESTAMP = new Date().toJSON();
+  appendFileSync(
+    `${FILE_TIMESTAMP}_results.json`,
+    JSON.stringify({ state: state }, null, 2) + ", "
+  );
 
   // Retrieves the user's socket information from the package.json
   const { socketPort } = state;
@@ -47,8 +53,12 @@ function start() {
   process.on("exit", exitHandler.bind(null, { cleanup: true }));
 }
 
+// envoked when user presses a key in terminal and appends result file with query result data
 function stop() {
-  appendFileSync("results.log", JSON.stringify(ALL_AGENT_DATA));
+  appendFileSync(
+    `${FILE_TIMESTAMP}_results.json`,
+    JSON.stringify({ allAgentData: ALL_AGENT_DATA }, null, 2)
+  );
   console.log("*********This has ended");
 }
 
