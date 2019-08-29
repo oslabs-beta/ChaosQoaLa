@@ -19,6 +19,7 @@
     "fs": "0.0.1-security",
     "http": "0.0.0",
     "inquirer": "^7.0.0",
+    "node-fetch": "^2.6.0",
     "prompt": "^1.0.0",
     "save": "^2.4.0",
     "socket.io": "^2.2.0"
@@ -30,7 +31,11 @@
       "blastRadius": "100",
       "delay": "100",
       "missingData": "100",
-      "runTime": "100"
+      "runTime": "100",
+      "steadyStateStartURL": "http://localhost:7766/steadystate/start",
+      "steadyStateStartHTTPVerb": "PUT",
+      "steadyStateStopURL": "http://localhost:7766/steadystate/stop/100/50/10/10/",
+      "steadyStateStopHTTPVerb": "GET"
     }
   }
 }
