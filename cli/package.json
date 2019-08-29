@@ -24,6 +24,13 @@
     "socket.io": "^2.2.0"
   },
   "chaosQoala": {
-    "state": {}
+    "state": {
+      "socketPort": "100",
+      "graphQLPort": "100",
+      "blastRadius": "100",
+      "delay": "100",
+      "missingData": "100",
+      "runTime": "100"
+    }
   }
 }
