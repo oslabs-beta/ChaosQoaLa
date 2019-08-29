@@ -25,4 +25,21 @@ module.exports = [{
   name: 'runTime',
   message: 'Please enter how long you would like the ChaosQoala to run (in minutes). **NOTE: The default runtime is 1 hour',
   default: 60,
-}];
+}, {
+  type: 'input',
+  name: 'steadyStateStartURL',
+  message: 'Please enter the steady state start URL',
+}, {
+  type: 'input',
+  name: 'steadyStateStartHTTPVerb',
+  message: 'Please enter the steady state start HTTP verb',
+}, {
+  type: 'input',
+  name: 'steadyStateStopURL',
+  message: 'Please enter the steady state stop URL',
+}, {
+  type: 'input',
+  name: 'steadyStateStopHTTPVerb',
+  message: 'Please enter the steady state stop HTTP verb',
+}
+];
