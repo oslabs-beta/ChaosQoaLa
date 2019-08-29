@@ -25,7 +25,7 @@
   },
   "chaosQoala": {
     "state": {
-      "socketPort": "100",
+      "socketPort": "http://localhost:1025",
       "graphQLPort": "100",
       "blastRadius": "100",
       "delay": "100",
