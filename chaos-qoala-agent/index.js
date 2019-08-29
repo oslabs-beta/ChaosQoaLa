@@ -98,16 +98,17 @@ const chaos = modifyRes((content, req, res) => {
     const data = JSON.parse(content.toString());
     const ip = req.header("x-forwarded-for") || req.connection.remoteAddress;
     REQUESTS_SO_FAR += 1;
+    const affectMessageWithChaos = (CHAOS_CHANCE < BLAST_RADIUS);
     if (ENSUE_CHAOS === true) {
       CHAOS_CHANCE = Math.random();
       const agentData = {
         timeOfResponse: new Date().toJSON(),
-        chaosResponse: ENSUE_CHAOS
+        chaosResponse: affectMessageWithChaos,
       };
       //
       // testing emit method (data successfully being received by apollo.test.js & express.test.js)
       io.emit("eucalyptus", agentData);
-      if (CHAOS_CHANCE < BLAST_RADIUS) {
+      if (affectMessageWithChaos) {
         // get list of keys in the data object returned by the query
         const dataSectionsOfResults = Object.keys(data.data);
         dataSectionsOfResults.forEach(name => {

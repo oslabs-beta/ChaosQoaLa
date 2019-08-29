@@ -28,8 +28,8 @@
     "state": {
       "socketPort": "http://localhost:1025",
       "graphQLPort": "100",
-      "blastRadius": "100",
-      "delay": "100",
+      "blastRadius": "0.5",
+      "delay": "5000",
       "missingData": "100",
       "runTime": "100",
       "steadyStateStartURL": "http://localhost:7766/steadystate/start",
