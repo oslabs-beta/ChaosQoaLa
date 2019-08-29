@@ -5,7 +5,7 @@ module.exports = [{
 }, {
   type: 'input',
   name: 'graphQLPort',
-  message: 'Please enter the UR of GraphQL service'
+  message: 'Please enter the URI of GraphQL service',
 },
 {
   type: 'number',
@@ -19,7 +19,7 @@ module.exports = [{
 }, {
   type: 'boolean',
   name: 'missingData',
-  message: 'Please enter the percentage of results you would like missing from your GQL queries',
+  message: 'Please enter TRUE or FALSE if you would like results missing from your GQL queries.',
 }, {
   type: 'number',
   name: 'runTime',

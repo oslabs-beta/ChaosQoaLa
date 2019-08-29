@@ -25,12 +25,12 @@
   },
   "chaosQoala": {
     "state": {
-      "socketPort": "http://localhost:1025",
-      "graphQLPort": "http://localhost:3000",
-      "blastRadius": "0.3",
-      "delay": "2000",
-      "missingData": "true",
-      "runTime": "60"
+      "socketPort": "100",
+      "graphQLPort": "100",
+      "blastRadius": "100",
+      "delay": "100",
+      "missingData": "100",
+      "runTime": "100"
     }
   }
 }
