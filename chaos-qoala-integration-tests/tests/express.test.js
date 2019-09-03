@@ -22,7 +22,7 @@ beforeAll((done) => {
       done();
     });
   });
-  // testing some code here (to see if agent data is received from index.js--->tests passing sucessfully)
+  // listen for incoming agent data sent during a chaos experiment
   socket.on('eucalyptus', (agentData) => {
     agentDataReceived = true;
   });
