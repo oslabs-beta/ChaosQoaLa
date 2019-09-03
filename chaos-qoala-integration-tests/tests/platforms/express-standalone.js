@@ -35,5 +35,5 @@ app.use('/graphql', expressGraphQL({
 
 app.listen(3000, () => {
   // eslint-disable-next-line no-console
-  console.log(`🚆 Express GraphQL Server ready at localhost:3000/graphql`);
+  console.log('🚆 Express GraphQL Server ready at localhost:3000/graphql');
 });
