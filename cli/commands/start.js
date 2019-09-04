@@ -16,7 +16,7 @@ async function start() {
   const { state } = parsedMyPackageJSON.chaosQoala;
   // Establishes a ensueChaos property on the state that will be set to
   state.ensueChaos = true;
-  // creates restult file with current time stamp. Appends file with chaos config from state
+  // creates result file with current time stamp. Appends file with chaos config from state
   const fileTimestamp = new Date().toJSON();
 
   // Retrieves the user's socket information from the package.json
@@ -51,7 +51,7 @@ async function start() {
   };
 
   (async () => {
-    console.log('Press any key to continue to stop');
+    console.log('Press any key to stop chaos');
     await keypress();
     await fetch(steadyStateStopURL, { method: steadyStateStopHTTPVerb })
       .then(response => response.json())
@@ -61,6 +61,11 @@ async function start() {
           JSON.stringify({ chaosConfig: state, chaosResults, agentData: ALL_AGENT_DATA }, null, 2),
         );
       });
+    // ensueChaos flag changed to false when any key pressed
+    state.ensueChaos = false;
+    socket.emit('eucalyptus', state, () => {
+      console.log('chaos ended');
+    });
   })().then(process.exit);
 }
 

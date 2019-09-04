@@ -24,18 +24,18 @@ let BLAST_RADIUS = 0;
 // this is calculated per message - but scoped at module level for ease of implementation
 let CHAOS_CHANCE = 0;
 // web socket address of config and data streaming
-// use a port number above 1000 for linux compatibility
+// use a port number above 1024 for linux compatibility
 const CHAOS_PORT = 1025;
 
 // start the socket channel on port 1025
-// configuration information will be sent too this channel and
+// configuration information will be sent to this channel and
 // live streaming results data will be sent back to the controller
-// process during chaos experiemnts.
+// process during chaos experiments.
 chaosSocketServer.listen(CHAOS_PORT);
 
 io.on('connection', (socket) => {
   // all chaos data is sent and received on the topic 'eucalyptus'
-  // if data arrives on this port then it is a config message fro the controller
+  // if data arrives on this port then it is a config message from the controller
   socket.on('eucalyptus', (config, acknowledge) => {
     // extract and assign configuration vals
     const {
@@ -82,10 +82,10 @@ function decoding(res, content) {
 }
 
 // FUNCTION THAT CAN BE USED TO CREATE A PIECE OF MIDDLEWARE
-// THAT RE-WRTIES THE EXPRESS RESPONSE API FUNCTIONS SO THAT
+// THAT RE-WRITES THE EXPRESS RESPONSE API FUNCTIONS SO THAT
 // RATHER THAN SENDING DATA BACK TO THE CLIENT THE DATA IS PASSED
 // TO THE 'modify' CALL BACK WHICH MAY MODIFY THE RESPONSE
-// BEFORE IT IS SEND BACK AS NORMAL TO THE CLIENT
+// BEFORE IT IS SENT BACK AS NORMAL TO THE CLIENT
 // -------------------------------------------------------------
 
 const modifyRes = function responseHijackingMiddlewareCreator(modify) {
@@ -145,7 +145,7 @@ const chaos = modifyRes(async (content, req, res) => {
     if (ENSUE_CHAOS === true) {
       // to determine if this response will be affected - 'roll the dice'
       // by getting a manual number and comparing against the blast radius
-      // the bigger the blast raidus value is the greater the chances the number
+      // the bigger the blast radius value is, the greater the chances the number
       // will be less than it and a chaos effect will be seen
       CHAOS_CHANCE = Math.random();
       const affectMessageWithChaos = (CHAOS_CHANCE < BLAST_RADIUS);
