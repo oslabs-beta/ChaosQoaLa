@@ -1,6 +1,7 @@
 const { prompt } = require('inquirer');
 const { magentaBright } = require('chalk');
 const { textSync } = require('figlet');
+const QueryInspector = require('../util/QueryInspector');
 
 // Requiring in the configure file from the same file
 const initalize = require('./initalize');
@@ -31,9 +32,13 @@ function configure() {
     ),
   );
   prompt(questions)
-    .then((result) => {
-      save(result);
-      console.log(`Your answers: ${JSON.stringify(result)}`);
+    .then(async (result) => {
+      const { graphQLPort } = result;
+      const inspector = new QueryInspector(graphQLPort);
+      await inspector.hydrateQueryMap();
+      const affectedQueries = inspector.getQueryMap();
+      save({ ...result, affectedQueries });
+      console.log('Your config has been saved to package.json - to enable data knockout on a schema query set it\'s flag to true in the affectedQueries section of package.json');
     });
 }
 

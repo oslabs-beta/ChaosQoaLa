@@ -27,15 +27,18 @@
   "chaosQoala": {
     "state": {
       "socketPort": "http://localhost:1025",
-      "graphQLPort": "100",
+      "graphQLPort": "http://localhost:3000/graphql",
       "blastRadius": "0.5",
-      "delay": "5000",
-      "missingData": "100",
-      "runTime": "100",
+      "delay": "3000",
+      "runTime": "60",
       "steadyStateStartURL": "http://localhost:7766/steadystate/start",
       "steadyStateStartHTTPVerb": "PUT",
-      "steadyStateStopURL": "http://localhost:7766/steadystate/stop/100/50/10/10/",
-      "steadyStateStopHTTPVerb": "GET"
+      "steadyStateStopURL": "http://localhost:7766/steadystate/stop/100/50/20/10",
+      "steadyStateStopHTTPVerb": "GET",
+      "affectedQueries": {
+        "dontKnockMeOut": false,
+        "knockMeOut": true
+      }
     }
   }
 }
