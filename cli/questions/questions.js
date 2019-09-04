@@ -17,10 +17,6 @@ module.exports = [{
   name: 'delay',
   message: 'Please enter the amount of time you would like your data to be dealyed (in milliseconds)',
 }, {
-  type: 'boolean',
-  name: 'missingData',
-  message: 'Please enter TRUE or FALSE if you would like results missing from your GQL queries.',
-}, {
   type: 'number',
   name: 'runTime',
   message: 'Please enter how long you would like the ChaosQoala to run (in minutes). **NOTE: The default runtime is 1 hour',
@@ -41,5 +37,5 @@ module.exports = [{
   type: 'input',
   name: 'steadyStateStopHTTPVerb',
   message: 'Please enter the steady state stop HTTP verb',
-}
+},
 ];

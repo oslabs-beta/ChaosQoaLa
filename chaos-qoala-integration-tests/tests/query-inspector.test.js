@@ -1,7 +1,7 @@
 const express = require('./platforms/express-graphql-app');
 
 const platform = express;
-const QueryInspector = require('./gql-schema/schemaInspector');
+const QueryInspector = require('../../cli/util/QueryInspector');
 
 beforeAll(async () => {
   await platform.start();
