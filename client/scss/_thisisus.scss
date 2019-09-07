@@ -1,0 +1,25 @@
+html, body {
+    
+    padding:0;
+}
+
+#thisisus {
+    background: linear-gradient(to top left, #e31e98 -34%, #827c82 47%);
+    margin-bottom: 0;
+    min-height: 30vh;
+    display: flex;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+
+    .whoami {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+
+    hr {
+        display: block;
+    }
+}

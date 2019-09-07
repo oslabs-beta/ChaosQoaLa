@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function Instructions() {
     return (
-        <div>
+        <div id='instructions'>
             <p>Step One</p>
             <p>Step Two</p>
             <p>Step Three</p>
