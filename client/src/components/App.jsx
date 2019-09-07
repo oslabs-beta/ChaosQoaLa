@@ -16,7 +16,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <NavBar />
+          <NavBar id='navbar' />
           <Main />
           <Instructions />
           <ThisIsUs/>

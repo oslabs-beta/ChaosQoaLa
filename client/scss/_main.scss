@@ -1,0 +1,73 @@
+html, body {
+    margin:0;
+    padding:0;
+    margin-bottom: 0;
+}
+
+#main {
+    //background: linear-gradient(to bottom right, #e31e98 -15%, #827c82 68%);
+    min-width: 100vw;
+    left: 0;
+    background: linear-gradient(to top left, #e31e98 -34%, #827c82 47%);
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-content: center;
+    min-height: 75vh;
+
+    #mainpglogo {
+        margin-top: 10rem;
+        // border: 5px solid green;
+        width: 15rem;
+        height: auto;
+        align-self: center;
+    }
+
+    #mainqoala {
+        margin-top: 7rem;
+        width: 5rem;
+        height: auto;
+        align-self: center;
+        padding-right: 1.5rem;
+    }
+
+    p {
+        align-self: center;
+        font-weight: 800;
+        font-family: 'Manjari';
+        font-size: 5rem;
+        color: rgba(243, 239, 239, 0.89);
+    }
+
+    span {
+        font-size: 6rem;
+        font-weight: 900;
+        align-self: center;
+    }
+
+    .mainp {
+        font-size: 1.5rem;
+        font-weight: 400;
+        align-self: center;
+    }
+
+    
+
+    #gitbutton {
+        align-self: center;
+
+    }
+
+    #npmbutton {
+        align-self: center;
+
+    }
+
+    #mainupload{
+        align-self: center;
+        color: white;
+        text-decoration: none;
+        font-size: 2rem;
+    }
+
+}

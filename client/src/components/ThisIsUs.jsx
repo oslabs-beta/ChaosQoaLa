@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 
 function ThisIsUs() {
     return (
-        <div>
-            {/* <img>Jake</img>
-            <img>Nic</img>
-            <img>Samantha</img>
-            <img>Simon</img> */}
+        <div id='thisisus'>
+            <p>Jake</p>
+            <p>Nic</p>
+            <p>Samantha</p>
+            <p>Simon</p>
             <p>LINK TO GITHUB AGAIN</p>
         </div>
     )
