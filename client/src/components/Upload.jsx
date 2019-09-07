@@ -34,7 +34,7 @@ class Upload extends Component {
   render() {
     return (
       <div>
-        UPLOAD PAGE
+        <h1>UPLOAD PAGE</h1>
       </div>
       // <form onSubmit={this.submitFile}>
       //   <input
