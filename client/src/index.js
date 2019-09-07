@@ -1,6 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
+import React from 'react';
+import { render } from 'react-dom';
+import App from './components/App.jsx';
 
-ReactDOM.render(<App />, document.getElementById("root"));
+// // uncomment so that webpack can bundle styles
+// import styles from './scss/application.scss';
+
+render(
+  <App />,
+  document.getElementById('root')
+);

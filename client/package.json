@@ -5,21 +5,27 @@
   "dependencies": {
     "aws-sdk": "^2.522.0",
     "axios": "^0.19.0",
+    "babel": "^6.23.0",
     "bluebird": "^3.5.5",
     "chart.js": "^2.8.0",
+    "enzyme": "^3.10.0",
     "express": "^4.17.1",
     "file-type": "^12.3.0",
-    "fs": "0.0.1-security",
     "multiparty": "^4.2.1",
+    "nodemon": "^1.19.2",
+    "path": "^0.12.7",
     "react": "^16.9.0",
     "react-chartjs-2": "^2.7.6",
     "react-dom": "^16.9.0",
     "react-router": "^5.0.1",
-    "react-scripts": "3.1.1"
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "3.1.1",
+    "webpack-dev-server": "^3.8.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "nodemon server/server.js",
+    "build": "NODE_ENV=production webpack",
+    "dev": "NODE_ENV=development nodemon server/server.js & webpack-dev-server --open",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -37,5 +43,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "babel-loader": "^8.0.6",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.8"
   }
 }
