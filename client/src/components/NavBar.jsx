@@ -1,18 +1,6 @@
 import React, { Fragment } from "react";
 import Upload from "./Upload.jsx";
 import { NavLink } from "react-router-dom";
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
-} from "reactstrap";
 
 // import DownloadButton from './DownloadButton.jsx';
 
