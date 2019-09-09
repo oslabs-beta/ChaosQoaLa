@@ -17,12 +17,12 @@
     "nodemon": "^1.19.2",
     "path": "^0.12.7",
     "react": "^16.9.0",
-    "react-bootstrap": "^1.0.0-beta.12",
     "react-chartjs-2": "^2.7.6",
     "react-dom": "^16.9.0",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
+    "reactstrap": "^8.0.1",
     "webpack-dev-server": "^3.8.0"
   },
   "scripts": {
