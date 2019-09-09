@@ -1,25 +1,101 @@
 html, body {
-    
     padding:0;
 }
 
+$screen-xs-min: 328px;
+
+$screen-sm-min: 576px;
+
+// Small tablets (portrait view)
+$screen-md-min: 768px;
+
+// Tablets and small desktops
+$screen-lg-min: 992px;
+
+// Large tablets and desktops
+$screen-xl-min: 1200px;
+
+@mixin xs {
+    @media (min-width: #{$screen-xs-min}){
+        @content;
+    }
+}
+// Small devices
+@mixin sm {
+    @media (min-width: #{$screen-sm-min}) {
+        @content;
+    }
+ }
+ 
+ // Medium devices
+ @mixin md {
+    @media (min-width: #{$screen-md-min}) {
+        @content;
+    }
+ }
+ 
+ // Large devices
+ @mixin lg {
+    @media (min-width: #{$screen-lg-min}) {
+        @content;
+    }
+ }
+ 
+ // Extra large devices
+ @mixin xl {
+    @media (min-width: #{$screen-xl-min}) {
+        @content;
+    }
+ }
+
 #thisisus {
     background: linear-gradient(to top left, #e31e98 -34%, #827c82 47%);
-    margin-bottom: 0;
-    min-height: 30vh;
     display: flex;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
+    flex-direction: column;
+    min-height: 50vh;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 3px solid red;
+
+    #meettheteam {
+        color: #F8F8FF;
+        display: flex;
+    }
+
+    #bios {
+        display: flex;
+        width: 70%;
+        align-items: center;
+        justify-content: space-around;
+        @include sm{
+            background: lime;
+        }
+        @include md{
+            background: none;
+        }
+    }
 
     .whoami {
-        flex: 0 0 25%;
-        max-width: 25%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: -webkit-fill-available;
+    }
+
+    h6{
+        color: #F8F8FF;
+        margin: auto;
+        font-size: 1rem;
     }
 
     hr {
         display: block;
+        color: #F8F8FF;
+        width: 8rem;
+    }
+    .outsidelinks {
+        display: flex;
+        width: 5rem;
+        justify-content: space-between;  
     }
 }
