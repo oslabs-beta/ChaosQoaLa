@@ -56,9 +56,14 @@ function ThisIsUs() {
           </div>
         </div>
       </div>
+      <div id ='opensource'>
+        <p>Want to contribute?</p>
+        <h6>ChaosQoala is an open source project</h6>
+      </div>
       <div id="finalgitlink">
         <p>Github</p>
       </div>
+      <h6>&copy; 2019 ChaosQoala/OSLabs. All rights reserved</h6>
     </div>
   );
 }
