@@ -2,51 +2,22 @@ html, body {
     padding:0;
 }
 
-$screen-xs-min: 328px;
+@mixin for-phone-only {
+    @media (max-width: 599px) { @content; }
+  }
 
-$screen-sm-min: 576px;
-
-// Small tablets (portrait view)
-$screen-md-min: 768px;
-
-// Tablets and small desktops
-$screen-lg-min: 992px;
-
-// Large tablets and desktops
-$screen-xl-min: 1200px;
-
-@mixin xs {
-    @media (min-width: #{$screen-xs-min}){
-        @content;
-    }
-}
-// Small devices
-@mixin sm {
-    @media (min-width: #{$screen-sm-min}) {
-        @content;
-    }
- }
- 
- // Medium devices
- @mixin md {
-    @media (min-width: #{$screen-md-min}) {
-        @content;
-    }
- }
- 
- // Large devices
- @mixin lg {
-    @media (min-width: #{$screen-lg-min}) {
-        @content;
-    }
- }
- 
- // Extra large devices
- @mixin xl {
-    @media (min-width: #{$screen-xl-min}) {
-        @content;
-    }
- }
+  @mixin for-tablet-portrait-up {
+    @media (min-width: 600px) and (max-width: 924px) { @content; }
+  }
+  @mixin for-tablet-landscape-up {
+    @media (min-width: 925px) { @content; }
+  }
+  @mixin for-desktop-up {
+    @media (min-width: 1200px) { @content; }
+  }
+  @mixin for-big-desktop-up {
+    @media (min-width: 1800px) { @content; }
+  }
 
 #thisisus {
     background: linear-gradient(to top left, #e31e98 -34%, #827c82 47%);
@@ -55,7 +26,6 @@ $screen-xl-min: 1200px;
     min-height: 50vh;
     align-items: center;
     justify-content: space-evenly;
-    border: 3px solid red;
 
     #meettheteam {
         color: #F8F8FF;
@@ -64,28 +34,56 @@ $screen-xl-min: 1200px;
 
     #bios {
         display: flex;
-        width: 70%;
+        width: 75%;
         align-items: center;
-        justify-content: space-around;
-        @include sm{
-            background: lime;
-        }
-        @include md{
-            background: none;
+        justify-content: space-between;
+        @include for-phone-only {
+            width: 100%;
+            flex-direction: column;
+            flex-wrap: wrap;
+            flex: 0 0 50%;
+            // border: 1px solid green;
+        } 
+        @include for-tablet-portrait-up{
+            width: 100%;
+            flex-direction: column;
+            flex-wrap: wrap;
+            flex: 0 0 50%;
         }
     }
+    
 
     .whoami {
         display: flex;
         flex-direction: column;
         align-items: center;
         width: -webkit-fill-available;
-    }
+        @include for-phone-only {
+            width: 25%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-basis: 25%;
+            margin-bottom: 2rem;
+            // border: 1px solid salmon;
+        } 
+        @include for-tablet-portrait-up {
+            width: 25%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-basis: 25%;
+            margin-bottom: 2rem;
+            // justify-content: space-evenly;
+        }
+    }  
 
     h6{
         color: #F8F8FF;
-        margin: auto;
+        margin: auto 0;
         font-size: 1rem;
+        // border: 1px solid purple;
+        text-align: center;
     }
 
     hr {

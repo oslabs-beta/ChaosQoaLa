@@ -36,6 +36,7 @@ function ThisIsUs() {
                     <hr/>
                     <div className='outsidelinks'>
                       <a href='https://github.com/Simon-IM'><img src='https://cqlimage.s3-us-west-1.amazonaws.com/GitHub-Mark-Light-32px.png'/></a>
+                      <a href='https://www.linkedin.com/in/simon-maharai-9553b9193/'><img src='https://cqlimage.s3-us-west-1.amazonaws.com/linkedin-3-32.png'/></a>
                     </div>
                 </div>
             </div>
