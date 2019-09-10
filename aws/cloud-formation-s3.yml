@@ -1,12 +1,22 @@
 AWSTemplateFormatVersion: 2010-09-09
+Parameters:
+  chaosWebsiteS3Bucket:
+    Description: The name of the bucket to store the static website files
+    Type: String
+  chaosLambdaS3Bucket:
+    Description: The name of the bucket to store the lambda function code during deployment
+    Type: String
 Resources:
   S3Bucket:
     Type: AWS::S3::Bucket
     Properties:
       AccessControl: PublicRead
-      BucketName: chaos-qoala-website-files
+      BucketName:
+        # refer to chaos-website-deployer code to work out how this param is passed
+        Ref: chaosWebsiteS3Bucket
       WebsiteConfiguration:
         IndexDocument: index.html
+        ErrorDocument: error.html
     Type: AWS::S3::Bucket
   BucketPolicy:
     Type: AWS::S3::BucketPolicy
@@ -28,7 +38,9 @@ Resources:
   S3LambdaBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: chaos-qoala-lambda-files
+      BucketName:
+        # refer to chaos-website-deployer code to work out how this param is passed
+        Ref: chaosLambdaS3Bucket
       PublicAccessBlockConfiguration:
         BlockPublicAcls: true
         BlockPublicPolicy: true
