@@ -3,6 +3,23 @@ html, body {
     padding:0;
 }
 
+@mixin for-phone-only {
+    @media (max-width: 599px) { @content; }
+  }
+
+  @mixin for-tablet-portrait-up {
+    @media (min-width: 600px) and (max-width: 924px) { @content; }
+  }
+  @mixin for-tablet-landscape-up {
+    @media (min-width: 925px) { @content; }
+  }
+  @mixin for-desktop-up {
+    @media (min-width: 1200px) { @content; }
+  }
+  @mixin for-big-desktop-up {
+    @media (min-width: 1800px) { @content; }
+  }
+
 #main {
     //background: linear-gradient(to bottom right, #e31e98 -15%, #827c82 68%);
     min-width: 100vw;
@@ -13,6 +30,12 @@ html, body {
     justify-content: center;
     align-content: center;
     min-height: 75vh;
+    border: 3px solid red;
+
+    @include for-phone-only {
+        border: 1px solid lime;
+        display: flex;
+    }
 
     #mainpglogo {
         margin-top: 10rem;
@@ -28,6 +51,41 @@ html, body {
         height: auto;
         align-self: center;
         padding-right: 1.5rem;
+        @include for-phone-only {
+            margin-top: 2rem;
+            margin: auto 0;
+            width: 3.5rem;
+            height: auto;
+            // border: 1px solid red;
+        }
+    }
+
+    #missionstatement {
+        align-self: center;
+        font-weight: 800;
+        font-family: 'Manjari';
+        font-size: 5rem;
+        color: rgba(243, 239, 239, 0.89);
+        @include for-phone-only {
+            font-size: 1em;
+            margin-top: 0.1rem;
+            // border: 1px solid green;
+        }
+    }
+
+    #title{
+        align-self: center;
+        font-weight: 800;
+        font-family: 'Manjari';
+        font-size: 5rem;
+        color: rgba(243, 239, 239, 0.89);
+        @include for-phone-only {
+            font-size: 1.99em;
+            margin-top: 5rem;
+            margin-bottom: 0.1rem;
+            // border: 1px solid lime;
+        }
+        
     }
 
     p {
@@ -36,40 +94,134 @@ html, body {
         font-family: 'Manjari';
         font-size: 5rem;
         color: rgba(243, 239, 239, 0.89);
+        @include for-phone-only {
+            font-size: 1.99em;
+            margin-top: 5rem;
+        }
     }
 
     span {
         font-size: 6rem;
         font-weight: 900;
         align-self: center;
+        @include for-phone-only {
+            font-size: 1.5em;
+            margin: auto 0;
+        }
     }
 
+    #gitsection{
+        border: 3px solid lime;
+        display: inline;
+    }
     .mainp {
         font-size: 1.5rem;
+        display: inline-block;
         font-weight: 400;
         align-self: center;
+        @include for-phone-only {
+            font-size: 1.3em;
+            margin-top: 5rem;
+        }
+        
     }
 
     a {
         align-self: center;
+        text-decoration: none;
     }
     
 
     #gitbutton {
         align-self: center;
+        display: flex;
+        font-weight: 400;
+        color: F8F8FF;
+        text-align: center;
+        vertical-align: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        padding: .5rem 1rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: .25rem;
 
+        @include for-phone-only{
+            //display: inline-block;
+            font-weight: 400;
+            color: #F8F8FF;
+            text-align: center;
+            vertical-align: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-color: grey;
+            padding: .1rem .1rem;
+            font-size: 0.3rem;
+            line-height: 1.5;
+            border-radius: .25rem;
+        }
+
+    }
+
+    .star {
+        width: 1.3em;
+        height: auto;
+        margin-right: 0.3em;
     }
 
     #npmbutton {
-        align-self: center;
+        display: inline-block;
+        font-weight: 400;
+        color: F8F8FF;
+        text-align: center;
+        vertical-align: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-color: transparent;
+        border: 1px solid #F8F8FF;
+        padding: .5rem 1rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: .25rem;
+       
+        @include for-phone-only{
+            display: inline-block;
+            font-weight: 400;
+            color: #F8F8FF;
+            text-align: center;
+            vertical-align: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-color: transparent;
+            border: 1px solid #F8F8FF;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: .25rem;
+        }
 
     }
+
+    #npmbutton:hover {
+        color: black;
+        background-color: white;
+        // border: 1px solid black;
+      }
 
     #mainupload{
         align-self: center;
         color: white;
         text-decoration: none;
         font-size: 2rem;
+        
     }
 
 }
