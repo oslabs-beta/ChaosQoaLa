@@ -34,25 +34,78 @@ body {
     justify-content: center;
     align-items: center;
 
+    #steponeparent {
+      display: flex;
+      min-width: 100%;
+      justify-content: space-between;
+      margin-top: 4rem;
+      margin-bottom: 5rem;
+    }
+
     #stepone {
-        display: flex;
-        flex-flow: column wrap;
-        justify-content: flex-start;
         align-self: flex-start;
     }
 
-    #steptwo{
-        display: flex;
-        flex-flow: column wrap;
-        align-self: flex-end;
-        margin-right: 3rem;
+    #planningphase {
+      margin-right: 4rem;
     }
 
-    #stepthree{
-        display: flex;
-        flex-flow: column wrap;
+    #steptwoparent {
+      display: flex;
+      flex-direction: row-reverse;
+      min-width: 100%;
+      justify-content: space-between;
+      margin-bottom: 5rem;
+    }
+
+    #steptwo {
+        align-self: flex-start;
+        margin-right: 8rem;
+    }
+
+    #stepthreeparent {
+      display: flex;
+      min-width: 100%;
+      justify-content: space-between;
+      margin-bottom: 5rem;
+    }
+
+    #stepthree {
         align-self: flex-start;
     }
+
+    // #steptwoparent {
+    //   display: flex;
+    //   flex-direction: column-reverse;
+    //   min-width: 100%;
+    //   justify-content: space-between;
+    //   border: 3px solid green;
+    //   height: auto;
+
+    // }
+
+    // #steptwo{
+    //     display: flex;
+    //     flex-flow: column wrap;
+    //     align-self: flex-end;
+    //     margin: auto 0;
+    //     margin-right: 3rem;
+    //     margin-top: 0rem;
+    //     margin-bottom: 10rem;
+    // }
+
+    // #cliimage {
+    //   justify-self: center;
+    //   border: 1px solid red;
+    //   width: 64%;
+    //   margin-top: 5rem;
+    // }
+
+    // #stepthree{
+    //     display: flex;
+    //     flex-flow: column wrap;
+    //     align-self: flex-start;
+    // }
 
     #download {
             display: inline-block;
