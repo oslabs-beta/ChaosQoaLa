@@ -58,7 +58,7 @@ Resources:
     Properties:
       BucketName: !Sub
           - www.${Domain}
-          - Domain: lovechaos.net
+          - Domain: chaosqoala.io
       AccessControl: BucketOwnerFullControl
       WebsiteConfiguration:
         RedirectAllRequestsTo:
@@ -68,17 +68,17 @@ Resources:
     Properties:
       HostedZoneName: !Sub 
           - ${Domain}.
-          - Domain: lovechaos.net
+          - Domain: chaosqoala.io
       Comment: Zone apex alias.
       RecordSets:
       - 
-        Name: www.lovechaos.net
+        Name: www.chaosqoala.io
         Type: A
         AliasTarget:
           HostedZoneId: !FindInMap [ RegionMap, !Ref 'AWS::Region', S3hostedzoneID]
           DNSName: !FindInMap [ RegionMap, !Ref 'AWS::Region', websiteendpoint]
       - 
-        Name: lovechaos.net
+        Name: chaosqoala.io
         Type: A
         AliasTarget:
           HostedZoneId: !FindInMap [ RegionMap, !Ref 'AWS::Region', S3hostedzoneID]

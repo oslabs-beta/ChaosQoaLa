@@ -20,7 +20,7 @@ Resources:
   customDomainForAPI:
     Type: AWS::ApiGateway::DomainName
     Properties:  
-      DomainName: "api.lovechaos.net"
+      DomainName: "api.chaosqoala.io"
       EndpointConfiguration:
           Types: 
             - REGIONAL
@@ -94,7 +94,7 @@ Resources:
       - "apiGateway"
     Properties: 
       BasePath: "transform"
-      DomainName: "api.lovechaos.net"
+      DomainName: "api.chaosqoala.io"
       RestApiId: !Ref "apiGateway"
   
   route53RecordSet:
@@ -107,7 +107,7 @@ Resources:
         EvaluateTargetHealth: false
         HostedZoneId: 
           Ref: regionHostedZoneId
-      Name: "api.lovechaos.net"
+      Name: "api.chaosqoala.io"
       HostedZoneId:
         Ref: customHostedZoneId
       Type: "A"
