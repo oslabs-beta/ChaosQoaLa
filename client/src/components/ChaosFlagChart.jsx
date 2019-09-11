@@ -4,9 +4,6 @@ import { Bar } from 'react-chartjs-2';
 class ChaosFlagChart extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      chaosFlagChartData: props.chaosFlagChartData
-    }
   }
 
   static defaultProps = {
@@ -20,7 +17,7 @@ class ChaosFlagChart extends Component {
     return (
       <div className="chart">
         <Bar
-          data={this.state.chaosFlagChartData}
+          data={this.props.chaosFlagChartData}
           options={{
             title: {
               display: this.props.displayTitle,
@@ -30,6 +27,11 @@ class ChaosFlagChart extends Component {
             legend: {
               display: this.props.displayLegend,
               position: this.props.legendPosition
+            },
+            scales: {
+              xAxes: [{
+                barThickness: 7
+              }]
             }
           }}
         />
