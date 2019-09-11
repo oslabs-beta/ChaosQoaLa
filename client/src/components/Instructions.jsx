@@ -30,7 +30,7 @@ function Instructions() {
                     <h2>Upload & Analyze Results</h2>
                 </div>
                 <div id='chartimage'>
-                    <img src=''/>
+                    <img src='https://cqlimage.s3-us-west-1.amazonaws.com/steadystate.jpeg' height='400'/>
                 </div>
             </div>
          <button id='download'>Download</button>
