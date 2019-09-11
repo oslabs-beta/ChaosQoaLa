@@ -4,7 +4,6 @@ const AdmZip = require('adm-zip');
 
 const awsVars = require('./common-aws');
 
-
 (async () => {
   try {
     await chaosDeployer.init();
@@ -31,7 +30,12 @@ const awsVars = require('./common-aws');
     const lambdaZip = zip.toBuffer();
     await chaosDeployer.createObject(awsVars.LAMBDA_S3_BUCKET, 'lambda.zip', lambdaZip);
     
-    const apiCreationParameters = [{ ParameterKey: 'chaosLambdaS3Bucket', ParameterValue: awsVars.LAMBDA_S3_BUCKET,} ];
+    const apiCreationParameters = [
+      { ParameterKey: 'chaosLambdaS3Bucket', ParameterValue: awsVars.LAMBDA_S3_BUCKET,},
+      { ParameterKey: 'regionalCertificateArn', ParameterValue: awsVars.REGIONAL_CERTIFICATE_ARN,},
+      { ParameterKey: 'customHostedZoneId', ParameterValue: awsVars.CUSTOM_DOMAIN_HOSTED_ZONE_ID,},
+      { ParameterKey: 'regionHostedZoneId', ParameterValue: awsVars.REGION_HOSTED_ZONE_ID,},
+    ];
     await chaosDeployer.createStack(awsVars.API_STACK_NAME, awsVars.API_STACK_TEMPLATE_FILE_PATH, apiCreationParameters);
     
   } catch (err) {

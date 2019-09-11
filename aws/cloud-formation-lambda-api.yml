@@ -5,6 +5,16 @@ Parameters:
   chaosLambdaS3Bucket:
     Description: The name of the bucket to store the lambda function code during deployment
     Type: String
+  regionalCertificateArn:
+    Description: The certificate generated from ACM for you custom hosting domain (example.com)
+    Type: String
+  customHostedZoneId:
+    Description: The hosted zone id for you custom hosting domain (example.com)
+    Type: String
+  regionHostedZoneId:
+    Description: The AWS region hosted zone id
+    Type: String
+
 
 Resources:
   customDomainForAPI:
@@ -14,7 +24,8 @@ Resources:
       EndpointConfiguration:
           Types: 
             - REGIONAL
-      RegionalCertificateArn: "arn:aws:acm:us-west-1:488017872451:certificate/5151944f-e0ef-4e7e-a0fd-e689ef3dcc30"
+      RegionalCertificateArn: 
+        Ref: regionalCertificateArn
 
   apiGateway:
     Type: "AWS::ApiGateway::RestApi"
@@ -65,9 +76,11 @@ Resources:
       AliasTarget: 
         DNSName: !GetAtt "customDomainForAPI.RegionalDomainName"
         EvaluateTargetHealth: false
-        HostedZoneId: "Z2MUQ32089INYE"
+        HostedZoneId: 
+          Ref: regionHostedZoneId
       Name: "api.nicolasvenegas.com"
-      HostedZoneId: "Z38RQ1WNFVPEXS"
+      HostedZoneId:
+        Ref: customHostedZoneId
       Type: "A"
       
   lambdaFunction:
