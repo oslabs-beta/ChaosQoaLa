@@ -24,7 +24,7 @@ const awsVars = require('./common-aws');
     const indexContents = fs.readFileSync('../client/index.html', 'utf8');
     const bundleContents = fs.readFileSync('../client/build/bundle.js', 'utf8');
     await chaosDeployer.createObject(awsVars.WEBSITE_S3_BUCKET, 'index.html', indexContents, {ContentType: "text/html", ACL: "public-read"});
-    await chaosDeployer.createObject(awsVars.WEBSITE_S3_BUCKET, 'bundle.js', bundleContents, {ContentType: "text/javascript", ACL: "public-read"});
+    await chaosDeployer.createObject(awsVars.WEBSITE_S3_BUCKET, 'build/bundle.js', bundleContents, {ContentType: "text/javascript", ACL: "public-read"});
 
     const zip = new AdmZip();
     zip.addLocalFile('./lambda.js');

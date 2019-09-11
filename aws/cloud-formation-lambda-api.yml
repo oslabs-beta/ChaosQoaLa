@@ -2,12 +2,6 @@ AWSTemplateFormatVersion: "2010-09-09"
 Description: "Lambda function to support ChaosQoala Website Data analysis and translation to Chart js data structure"
 
 Parameters:
-  apiGatewayStageName:
-    Type: "String"
-    AllowedPattern: "^[a-z0-9]+$"
-    # this must be the same value as the last section of the path in the fetch request in the FileUpload React component
-    Default: "chaosqoalaapi"
-
   lambdaFunctionName:
     Type: "String"
     AllowedPattern: "^[a-zA-Z0-9]+[a-zA-Z0-9-]+[a-zA-Z0-9]+$"
@@ -22,7 +16,7 @@ Resources:
     Type: AWS::ApiGateway::DomainName
     Properties:  
       DomainName: "api.nicolasvenegas.com"
-      EndpointConfiguration: 
+      EndpointConfiguration:
           Types: 
             - REGIONAL
       RegionalCertificateArn: "arn:aws:acm:us-west-1:488017872451:certificate/5151944f-e0ef-4e7e-a0fd-e689ef3dcc30"
@@ -56,7 +50,7 @@ Resources:
       - "apiGatewayRootMethod"
     Properties:
       RestApiId: !Ref "apiGateway"
-      StageName: !Ref "apiGatewayStageName"
+      StageName: logs
   
   mappingCustomDomainToChaosAPI:
     Type: AWS::ApiGateway::BasePathMapping
@@ -64,7 +58,7 @@ Resources:
       - "customDomainForAPI"
       - "apiGateway"
     Properties: 
-      BasePath: "logtransform"
+      BasePath: "transform"
       DomainName: "api.nicolasvenegas.com"
       RestApiId: !Ref "apiGateway"
   
@@ -136,7 +130,7 @@ Resources:
 
 Outputs:
   apiGatewayInvokeURL:
-    Value: !Sub "https://${apiGateway}.execute-api.${AWS::Region}.amazonaws.com/${apiGatewayStageName}"
+    Value: !Sub "https://${apiGateway}.execute-api.${AWS::Region}.amazonaws.com/logs"
 
   lambdaArn:
     Value: !GetAtt "lambdaFunction.Arn"
