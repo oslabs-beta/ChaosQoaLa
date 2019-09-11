@@ -1,0 +1,173 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Lambda function to support ChaosQoala Website Data analysis and translation to Chart js data structure"
+
+Parameters:
+  chaosLambdaS3Bucket:
+    Description: The name of the bucket to store the lambda function code during deployment
+    Type: String
+  regionalCertificateArn:
+    Description: The certificate generated from ACM for you custom hosting domain (example.com)
+    Type: String
+  customHostedZoneId:
+    Description: The hosted zone id for you custom hosting domain (example.com)
+    Type: String
+  regionHostedZoneId:
+    Description: The AWS region hosted zone id
+    Type: String
+
+
+Resources:
+  customDomainForAPI:
+    Type: AWS::ApiGateway::DomainName
+    Properties:  
+      DomainName: "api.chaosqoala.io"
+      EndpointConfiguration:
+          Types: 
+            - REGIONAL
+      RegionalCertificateArn: 
+        Ref: regionalCertificateArn
+
+  apiGateway:
+    Type: "AWS::ApiGateway::RestApi"
+    Properties:
+      Name: "chaos-qoala-api"
+      Description: "Chaos Qoala API"
+      EndpointConfiguration: 
+        Types: 
+          - REGIONAL
+
+  apiGatewayRootMethod:
+    Type: "AWS::ApiGateway::Method"
+    Properties:
+      AuthorizationType: "NONE"
+      HttpMethod: "POST"
+      Integration:
+        IntegrationHttpMethod: "POST"
+        Type: "AWS_PROXY"
+        Uri: !Sub
+          - "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${lambdaArn}/invocations"
+          - lambdaArn: !GetAtt "lambdaFunction.Arn"
+      ResourceId: !GetAtt "apiGateway.RootResourceId"
+      RestApiId: !Ref "apiGateway"
+
+  OptionsMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      AuthorizationType: NONE
+      RestApiId: !Ref "apiGateway"
+      ResourceId: !GetAtt "apiGateway.RootResourceId"
+      HttpMethod: OPTIONS
+      Integration:
+        IntegrationResponses:
+        - StatusCode: 200
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+            method.response.header.Access-Control-Allow-Methods: "'POST,OPTIONS'"
+            method.response.header.Access-Control-Allow-Origin: "'*'"
+          ResponseTemplates:
+            application/json: ''
+        PassthroughBehavior: WHEN_NO_MATCH
+        RequestTemplates:
+          application/json: '{"statusCode": 200}'
+        Type: MOCK
+      MethodResponses:
+      - StatusCode: 200
+        ResponseModels:
+          application/json: 'Empty'
+        ResponseParameters:
+            method.response.header.Access-Control-Allow-Headers: false
+            method.response.header.Access-Control-Allow-Methods: false
+            method.response.header.Access-Control-Allow-Origin: false
+
+  apiGatewayDeployment:
+    Type: "AWS::ApiGateway::Deployment"
+    DependsOn:
+      - "apiGatewayRootMethod"
+    Properties:
+      RestApiId: !Ref "apiGateway"
+      StageName: logs
+  
+  mappingCustomDomainToChaosAPI:
+    Type: AWS::ApiGateway::BasePathMapping
+    DependsOn:
+      - "customDomainForAPI"
+      - "apiGateway"
+    Properties: 
+      BasePath: "transform"
+      DomainName: "api.chaosqoala.io"
+      RestApiId: !Ref "apiGateway"
+  
+  route53RecordSet:
+    Type: AWS::Route53::RecordSet
+    DependsOn:
+      - "mappingCustomDomainToChaosAPI"
+    Properties: 
+      AliasTarget: 
+        DNSName: !GetAtt "customDomainForAPI.RegionalDomainName"
+        EvaluateTargetHealth: false
+        HostedZoneId: 
+          Ref: regionHostedZoneId
+      Name: "api.chaosqoala.io"
+      HostedZoneId:
+        Ref: customHostedZoneId
+      Type: "A"
+      
+  lambdaFunction:
+    Type: "AWS::Lambda::Function"
+    Properties:
+      Description: "function that turns a json chaos results log into data consumable by chart js"
+      Code:
+        S3Bucket: !Ref "chaosLambdaS3Bucket"
+        S3Key: "lambda.zip"
+      FunctionName: "chaos-qoala-data-analysis-and-transform"
+      Handler: "lambda.handler"
+      MemorySize: 128
+      Role: !GetAtt "lambdaIAMRole.Arn"
+      Runtime: "nodejs8.10"
+      Timeout: 300
+
+  lambdaApiGatewayInvoke:
+    Type: "AWS::Lambda::Permission"
+    Properties:
+      Action: "lambda:InvokeFunction"
+      FunctionName: !GetAtt "lambdaFunction.Arn"
+      Principal: "apigateway.amazonaws.com"
+      SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGateway}/*/POST/"
+
+  lambdaIAMRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Action:
+              - "sts:AssumeRole"
+            Effect: "Allow"
+            Principal:
+              Service:
+                - "lambda.amazonaws.com"
+      Policies:
+        - PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Action:
+                  - "logs:CreateLogGroup"
+                  - "logs:CreateLogStream"
+                  - "logs:PutLogEvents"
+                Effect: "Allow"
+                Resource:
+                  - !Sub "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/chaos-qoala-data-analysis-and-transform:*"
+          PolicyName: "lambda"
+
+  lambdaLogGroup:
+    Type: "AWS::Logs::LogGroup"
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/chaos-qoala-data-analysis-and-transform"
+      RetentionInDays: 90
+
+Outputs:
+  apiGatewayInvokeURL:
+    Value: !Sub "https://${apiGateway}.execute-api.${AWS::Region}.amazonaws.com/logs"
+
+  lambdaArn:
+    Value: !GetAtt "lambdaFunction.Arn"
