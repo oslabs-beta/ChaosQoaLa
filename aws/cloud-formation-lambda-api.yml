@@ -2,11 +2,6 @@ AWSTemplateFormatVersion: "2010-09-09"
 Description: "Lambda function to support ChaosQoala Website Data analysis and translation to Chart js data structure"
 
 Parameters:
-  lambdaFunctionName:
-    Type: "String"
-    AllowedPattern: "^[a-zA-Z0-9]+[a-zA-Z0-9-]+[a-zA-Z0-9]+$"
-    Default: "chaos-qoala-data-analysis-and-transform"
-
   chaosLambdaS3Bucket:
     Description: The name of the bucket to store the lambda function code during deployment
     Type: String
@@ -82,7 +77,7 @@ Resources:
       Code:
         S3Bucket: !Ref "chaosLambdaS3Bucket"
         S3Key: "lambda.zip"
-      FunctionName: !Ref "lambdaFunctionName"
+      FunctionName: "chaos-qoala-data-analysis-and-transform"
       Handler: "lambda.handler"
       MemorySize: 128
       Role: !GetAtt "lambdaIAMRole.Arn"
@@ -119,13 +114,13 @@ Resources:
                   - "logs:PutLogEvents"
                 Effect: "Allow"
                 Resource:
-                  - !Sub "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/${lambdaFunctionName}:*"
+                  - !Sub "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/chaos-qoala-data-analysis-and-transform:*"
           PolicyName: "lambda"
 
   lambdaLogGroup:
     Type: "AWS::Logs::LogGroup"
     Properties:
-      LogGroupName: !Sub "/aws/lambda/${lambdaFunctionName}"
+      LogGroupName: !Sub "/aws/lambda/chaos-qoala-data-analysis-and-transform"
       RetentionInDays: 90
 
 Outputs:
