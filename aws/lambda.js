@@ -1,9 +1,19 @@
-exports.handler = async (event) => {
+exports.handler = function(event, context) {
     
-  // transform data into chart.js data
-  const response = {
-      statusCode: 200,
-      body: JSON.stringify({originalData: JSON.parse(event)}),
+  var responseCode = 200;
+  
+  var response = {
+      statusCode: responseCode,
+      headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type" : "application/json",
+          "Access-Control-Allow-Origin" : "*",
+          "Allow" : "OPTIONS, POST",
+          "Access-Control-Allow-Methods" : "OPTIONS, POST",
+          "Access-Control-Allow-Headers" : "*"
+      },
+      body: JSON.stringify(event)
   };
-  return response;
+  
+  context.succeed(response);
 };
