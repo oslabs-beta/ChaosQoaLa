@@ -66,46 +66,16 @@ body {
     #stepthreeparent {
       display: flex;
       min-width: 100%;
-      justify-content: space-between;
+      justify-content: space-around;
+      // margin-left: 7rem;
       margin-bottom: 5rem;
+      // margin-right: 10rem;
     }
 
     #stepthree {
         align-self: flex-start;
     }
 
-    // #steptwoparent {
-    //   display: flex;
-    //   flex-direction: column-reverse;
-    //   min-width: 100%;
-    //   justify-content: space-between;
-    //   border: 3px solid green;
-    //   height: auto;
-
-    // }
-
-    // #steptwo{
-    //     display: flex;
-    //     flex-flow: column wrap;
-    //     align-self: flex-end;
-    //     margin: auto 0;
-    //     margin-right: 3rem;
-    //     margin-top: 0rem;
-    //     margin-bottom: 10rem;
-    // }
-
-    // #cliimage {
-    //   justify-self: center;
-    //   border: 1px solid red;
-    //   width: 64%;
-    //   margin-top: 5rem;
-    // }
-
-    // #stepthree{
-    //     display: flex;
-    //     flex-flow: column wrap;
-    //     align-self: flex-start;
-    // }
 
     #download {
             display: inline-block;
