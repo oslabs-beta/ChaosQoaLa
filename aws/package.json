@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "adm-zip": "^0.4.13",
     "aws-sdk": "^2.524.0",
     "dotenv": "^8.1.0"
   },

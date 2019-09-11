@@ -1,6 +1,9 @@
 const fs = require('fs');
 const chaosDeployer = require('./chaos-website-deployer');
+const AdmZip = require('adm-zip');
+
 const awsVars = require('./common-aws');
+
 
 (async () => {
   try {
@@ -18,15 +21,19 @@ const awsVars = require('./common-aws');
 
     await chaosDeployer.createStack(awsVars.S3_STACK_NAME, awsVars.S3_STACK_TEMPLATE_FILE_PATH, s3CreationParameters);
 
-    const index = fs.readFileSync('../client/index.html', 'utf8');
-    const bundle = fs.readFileSync('../client/build/bundle.js', 'utf8');
-    const lambda = fs.readFileSync('../client/build/bundle.js', 'utf8');
-    
-    await chaosDeployer.createObject(awsVars.WEBSITE_S3_BUCKET, 'index.html', index, {ContentType: "text/html", ACL: "public-read"});
-    await chaosDeployer.createObject(awsVars.WEBSITE_S3_BUCKET, 'bundle.js', bundle, {ContentType: "text/javascript", ACL: "public-read"});
-    await chaosDeployer.createObject(awsVars.LAMBDA_S3_BUCKET, 'lambda.js', lambda);
+    const indexContents = fs.readFileSync('../client/index.html', 'utf8');
+    const bundleContents = fs.readFileSync('../client/build/bundle.js', 'utf8');
+    await chaosDeployer.createObject(awsVars.WEBSITE_S3_BUCKET, 'index.html', indexContents, {ContentType: "text/html", ACL: "public-read"});
+    await chaosDeployer.createObject(awsVars.WEBSITE_S3_BUCKET, 'bundle.js', bundleContents, {ContentType: "text/javascript", ACL: "public-read"});
 
-    await chaosDeployer.createStack(awsVars.API_STACK_NAME, awsVars.API_STACK_TEMPLATE_FILE_PATH);
+    const zip = new AdmZip();
+    zip.addLocalFile('./lambda.js');
+    const lambdaZip = zip.toBuffer();
+    await chaosDeployer.createObject(awsVars.LAMBDA_S3_BUCKET, 'lambda.zip', lambdaZip);
+    
+    const apiCreationParameters = [{ ParameterKey: 'chaosLambdaS3Bucket', ParameterValue: awsVars.LAMBDA_S3_BUCKET,} ];
+    await chaosDeployer.createStack(awsVars.API_STACK_NAME, awsVars.API_STACK_TEMPLATE_FILE_PATH, apiCreationParameters);
+    
   } catch (err) {
     console.log(err);
   }

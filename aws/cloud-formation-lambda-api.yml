@@ -13,12 +13,28 @@ Parameters:
     AllowedPattern: "^[a-zA-Z0-9]+[a-zA-Z0-9-]+[a-zA-Z0-9]+$"
     Default: "chaos-qoala-data-analysis-and-transform"
 
+  chaosLambdaS3Bucket:
+    Description: The name of the bucket to store the lambda function code during deployment
+    Type: String
+
 Resources:
+  customDomainForAPI:
+    Type: AWS::ApiGateway::DomainName
+    Properties:  
+      DomainName: "api.nicolasvenegas.com"
+      EndpointConfiguration: 
+          Types: 
+            - REGIONAL
+      RegionalCertificateArn: "arn:aws:acm:us-west-1:488017872451:certificate/5151944f-e0ef-4e7e-a0fd-e689ef3dcc30"
+
   apiGateway:
     Type: "AWS::ApiGateway::RestApi"
     Properties:
       Name: "chaos-qoala-api"
       Description: "Chaos Qoala API"
+      EndpointConfiguration: 
+        Types: 
+          - REGIONAL
 
   apiGatewayRootMethod:
     Type: "AWS::ApiGateway::Method"
@@ -41,24 +57,39 @@ Resources:
     Properties:
       RestApiId: !Ref "apiGateway"
       StageName: !Ref "apiGatewayStageName"
-
+  
+  mappingCustomDomainToChaosAPI:
+    Type: AWS::ApiGateway::BasePathMapping
+    DependsOn:
+      - "customDomainForAPI"
+      - "apiGateway"
+    Properties: 
+      BasePath: "logtransform"
+      DomainName: "api.nicolasvenegas.com"
+      RestApiId: !Ref "apiGateway"
+  
+  route53RecordSet:
+    Type: AWS::Route53::RecordSet
+    DependsOn:
+      - "mappingCustomDomainToChaosAPI"
+    Properties: 
+      AliasTarget: 
+        DNSName: !GetAtt "customDomainForAPI.RegionalDomainName"
+        EvaluateTargetHealth: false
+        HostedZoneId: "Z2MUQ32089INYE"
+      Name: "api.nicolasvenegas.com"
+      HostedZoneId: "Z38RQ1WNFVPEXS"
+      Type: "A"
+      
   lambdaFunction:
     Type: "AWS::Lambda::Function"
     Properties:
-      Code:
-        ZipFile: |
-          exports.handler = async (event) => {
-              
-              // transform data into chart.js data
-              const response = {
-                  statusCode: 200,
-                  body: JSON.stringify({originalData: event}),
-              };
-              return response;
-          };
       Description: "function that turns a json chaos results log into data consumable by chart js"
+      Code:
+        S3Bucket: !Ref "chaosLambdaS3Bucket"
+        S3Key: "lambda.zip"
       FunctionName: !Ref "lambdaFunctionName"
-      Handler: "index.handler"
+      Handler: "lambda.handler"
       MemorySize: 128
       Role: !GetAtt "lambdaIAMRole.Arn"
       Runtime: "nodejs8.10"

@@ -17,7 +17,7 @@ module.exports = {
   }),
   stackExists: (name) => new Promise((resolve, reject) => {
     const cloudformation = new AWS.CloudFormation({ apiVersion: '2010-05-15' });
-    const currentStacksQueryParams = { StackStatusFilter: ['CREATE_COMPLETE', 'CREATE_IN_PROGRESS', 'DELETE_FAILED'] };
+    const currentStacksQueryParams = { StackStatusFilter: ['CREATE_COMPLETE', 'CREATE_IN_PROGRESS', 'DELETE_FAILED', 'ROLLBACK_COMPLETE'] };
     cloudformation.listStacks(currentStacksQueryParams, (err, data) => {
       if (err) {
         reject(err.stack); // an error occurred
