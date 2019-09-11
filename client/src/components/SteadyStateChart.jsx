@@ -1,12 +1,9 @@
-import React, { Component } from "react";
-import { Line } from "react-chartjs-2";
+import React, { Component } from 'react';
+import { Line } from 'react-chartjs-2';
 
 class SteadyStateChart extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      steadyStateChartData: props.steadyStateChartData
-    }
   }
 
   static defaultProps = {
@@ -20,11 +17,11 @@ class SteadyStateChart extends Component {
     return (
       <div className="chart">
         <Line
-          data={this.state.steadyStateChartData}
+          data={this.props.steadyStateChartData}
           options={{
             title: {
               display: this.props.displayTitle,
-              text: "Steady State Results",
+              text: "Steady State",
               fontSize: 25
             },
             legend: {
