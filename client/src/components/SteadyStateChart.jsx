@@ -1,30 +1,30 @@
 import React, { Component } from "react";
-import { Bar, Line, Pie } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 
-class Chart extends Component {
-  constructor(props) {
+class SteadyStateChart extends Component {
+  constructor(props){
     super(props);
     this.state = {
-      chartData: props.chartData
-    };
+      steadyStateChartData: props.steadyStateChartData
+    }
   }
 
   static defaultProps = {
     displayTitle: true,
     displayLegend: true,
-    legendPosition: "right",
-    location: "City"
-  };
+    legendPosition: 'right',
+    location: 'City'
+  }
 
   render() {
     return (
       <div className="chart">
         <Line
-          data={this.state.chartData}
+          data={this.state.steadyStateChartData}
           options={{
             title: {
               display: this.props.displayTitle,
-              text: "Largest Cities in " + this.props.location,
+              text: "Steady State Results",
               fontSize: 25
             },
             legend: {
@@ -36,6 +36,7 @@ class Chart extends Component {
       </div>
     );
   }
+  
 }
 
-export default Chart;
+export default SteadyStateChart;
