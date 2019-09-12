@@ -32,6 +32,9 @@ Mappings:
     sa-east-1:
       S3hostedzoneID: Z31GFT0UA1I2HV
       websiteendpoint: s3-website-sa-east-1.amazonaws.com
+    us-east-2:
+      S3hostedzoneID: Z2O1EMRO9K5GLX
+      websiteendpoint: s3-website.us-east-2.amazonaws.com
 Resources:
   S3LambdaBucket:
     Type: AWS::S3::Bucket

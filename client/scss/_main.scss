@@ -42,12 +42,16 @@ body {
   align-content: center;
   min-height: 75vh;
 
-  @include for-phone-only {
-    display: flex;
-  }
+ 
 
   @include for-tablet-portrait-up {
       display: flex;
+  }
+
+  @include for-phone-only {
+    display: flex;
+    //max-width: 100%;
+    border: 2px solid lawngreen;
   }
 
   #mainpglogo {

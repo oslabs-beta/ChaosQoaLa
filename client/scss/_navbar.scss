@@ -33,6 +33,9 @@
   padding: 0 10px;
   color: rgba(117, 117, 117, 1);
   box-shadow: 5px 10px 20px -20px white;
+  @include for-phone-only {
+    min-width: 100%;
+}
 }
 
 #navBarQL {
