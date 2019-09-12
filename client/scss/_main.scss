@@ -44,10 +44,13 @@ body {
 
   @include for-phone-only {
     display: flex;
-    border: 5px solid green;
   }
 
   @include for-tablet-portrait-up {
+    display: flex;
+  }
+
+  @include for-phone-only {
     display: flex;
   }
 
