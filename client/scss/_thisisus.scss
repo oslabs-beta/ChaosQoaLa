@@ -37,6 +37,7 @@ body {
   min-height: 50vh;
   align-items: center;
   justify-content: space-evenly;
+  font-family: "Manjari";
 
   #meettheteam {
     color: #f8f8ff;
@@ -109,12 +110,12 @@ body {
   }
 }
 
-#opensource{
+#opensource {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
   margin-top: 3rem;
 
   p {
@@ -123,14 +124,11 @@ body {
     color: #f8f8ff;
     margin-bottom: 0.5rem;
   }
- 
+
   h6 {
     color: #f8f8ff;
   }
-
-
 }
-
 
 #finalgitlink {
   display: inline-block;

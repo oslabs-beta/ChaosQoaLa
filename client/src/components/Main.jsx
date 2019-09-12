@@ -27,7 +27,7 @@ function Main() {
         </a>
       </p>
       <div id="downloadbutton">
-        <a href="https://www.npmjs.com/" target="blank">
+        <a href="https://www.npmjs.com/package/chaosqoala" target="blank">
           <button id="npmbutton">Download</button>
         </a>
       </div>
