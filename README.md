@@ -24,7 +24,7 @@ Once installed in your server's codebase the agent can be integrated in 3 lines 
 ![enter image description here](https://cqlimage.s3-us-west-1.amazonaws.com/Screen+Shot+2019-09-11+at+8.29.13+PM.png)
 
    
-**Controller**
+> **Controller**
 Install on each test users' machine.
 
     # npm install chaosqoaloa
@@ -39,7 +39,7 @@ A key metric in chaos engineering experiments is 'steady state'. Steady state is
 
 ## **Using ChaosQoaLA**
 
-**Configuring a test run**
+> **Configuring a test run**
 To configure a test run enter the following command on a user's machine with the Controller installed
 
     # chaosqoala configure
@@ -73,7 +73,7 @@ Enter the fully qualified URI for the steady state service you have implemented,
     Please enter the steady state stop HTTP verb
 Enter the http verb used to invoke the steady state stop route, eg GET/POST/PUT etc.
 
-**Configuring query knockout**
+> **Configuring query knockout**
 Once configure has been ran the Controller will write the configuration to its package.json. The Controller also inspects the GraphQL end point entered and extracts a list of available queries. To knock out data for a GraphQL query during an experiment just toggle the booleans in the affectedQueries object of the package.json:
 
     "chaosConfig": {
@@ -83,7 +83,7 @@ Once configure has been ran the Controller will write the configuration to its p
     	"knockMeOut": true
     	},
     },
-**Running an experiment**
+> **Running an experiment**
 Once you are happy with the configuration the experiment can be started with the start command
 
     # chaosqoala start
