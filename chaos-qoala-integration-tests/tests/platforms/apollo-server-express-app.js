@@ -28,14 +28,13 @@ module.exports = {
     const app = express();
 
     // 🐨 🐨 🐨 🐨 🐨 🐨 🐨 🐨 🐨
-    // eslint-disable-next-line import/no-unresolved
-    // eslint-disable-next-line import/no-extraneous-dependencies
-    const { chaos, chaosSocketServer } = require('chaos-qoala-agent');
+    const { chaos, chaosSocketServer } = require('chaosqoala-agent');
     app.use(chaos);
     this.chaosSocketServer = chaosSocketServer;
     // 🐨 🐨 🐨 🐨 🐨 🐨 🐨 🐨 🐨
 
     apollo.applyMiddleware({ app }); // app is from an existing express app
+
     this.gqlserver = app.listen({ port: this.port }, () => {
       // eslint-disable-next-line no-console
       console.log(`🚀 Apollo Server ready at http://localhost:${this.port}${apollo.graphqlPath}`);

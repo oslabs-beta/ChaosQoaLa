@@ -17,13 +17,14 @@ Once installed in your server's codebase the agent can be integrated in 3 lines 
 
 > Express Graph QL example:
 
-![enter image description here](https://cqlimage.s3-us-west-1.amazonaws.com/Screen+Shot+2019-09-11+at+8.29.33+PM.png)
+![enter image description here](https://cqlimage.s3-us-west-1.amazonaws.com/Express+Server.png)
 
 > Apollo Server Express example:
 
-![enter image description here](https://cqlimage.s3-us-west-1.amazonaws.com/Screen+Shot+2019-09-11+at+8.29.13+PM.png)
+![enter image description here](https://cqlimage.s3-us-west-1.amazonaws.com/Apollo+Server.png)
 
-   
+
+
 **Controller**
 
 
@@ -33,13 +34,13 @@ Install on each test users' machine.
 
     
 ## **Steady State Integration**
-A key metric in chaos engineering experiments is 'steady state'. Steady state is a measure of how well a system is performing. Different systems will be measured by different metrics, for example Netflix uses 'number of plays' to evaluate how well their systems or service is performing. ChaosQoaLa requires access to an endpoint that can be called when the chaos experiemnt starts, and again when the experiement ends. The end point must be stateful and respond to the stop invocation with steady state data points for the duration of the test run. The results are expected to be in a JSON array in the format:
+A key metric in chaos engineering experiments is 'steady state'. Steady state is a measure of how well a system is performing. Different systems will be measured by different metrics, for example Netflix uses 'number of plays' to evaluate how well their systems or service is performing. ChaosQoaLa requires access to an endpoint that can be called when the chaos experiment starts, and again when the experiment ends. The end point must be stateful and respond to the stop invocation with steady state data points for the duration of the test run. The results are expected to be in a JSON array in the format:
 
      [  { "timeOfResult": "2019-09-10T04:34:22.290Z", "result": 97 }, 
         { "timeOfResult": "2019-09-10T04:34:22.390Z", "result": 79 },
         {....  ]
 
-## **Using ChaosQoaLA**
+## **Using ChaosQoaLa**
 
 **Configuring a test run**
 
