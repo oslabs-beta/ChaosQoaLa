@@ -11,10 +11,6 @@ class Graphs extends Component {
     };
   }
 
-  // componentWillMount() {
-  //   this.getChartData();
-  // }
-
 
   render() {
     const steadyStateChartConfig = {

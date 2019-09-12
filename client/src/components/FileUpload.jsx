@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import Graphs from './Graphs.jsx';
 
 function FileUpload() {
   const [data, setData] = useState();
@@ -22,7 +23,7 @@ function FileUpload() {
         body: JSON.stringify(binaryStr),
       })
         .then((response) => response.json())
-        .then((json) => setData(JSON.stringify(json)));
+        .then((json) => setData(json));
     };
 
     acceptedFiles.forEach((file) => reader.readAsBinaryString(file));
@@ -51,7 +52,7 @@ function FileUpload() {
         }
       </div>
       <div>
-        {data}
+        {!data ? '' : <Graphs data={data}/>}
       </div>
     </div>
   );
