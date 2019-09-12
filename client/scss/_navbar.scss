@@ -1,20 +1,29 @@
 @mixin for-phone-only {
-    @media (max-width: 599px) { @content; }
+  @media (max-width: 599px) {
+    @content;
   }
+}
 
-  @mixin for-tablet-portrait-up {
-    @media (min-width: 600px) and (max-width: 924px) { @content; }
+@mixin for-tablet-portrait-up {
+  @media (min-width: 600px) and (max-width: 924px) {
+    @content;
   }
-  @mixin for-tablet-landscape-up {
-    @media (min-width: 925px) { @content; }
+}
+@mixin for-tablet-landscape-up {
+  @media (min-width: 925px) {
+    @content;
   }
-  @mixin for-desktop-up {
-    @media (min-width: 1200px) { @content; }
+}
+@mixin for-desktop-up {
+  @media (min-width: 1200px) {
+    @content;
   }
-  @mixin for-big-desktop-up {
-    @media (min-width: 1800px) { @content; }
+}
+@mixin for-big-desktop-up {
+  @media (min-width: 1800px) {
+    @content;
   }
-
+}
 
 #navbar {
   background-color: #171c1fe8;
@@ -33,19 +42,17 @@
   padding: 0 10px;
   color: rgba(117, 117, 117, 1);
   box-shadow: 5px 10px 20px -20px white;
-  @include for-phone-only {
-    min-width: 100%;
-}
+  font-family: "Manjari";
 }
 
 #navBarQL {
   height: 2.5rem;
   margin-left: 1.3rem;
-  @include for-phone-only{
-      height: 2.0rem;
+  @include for-phone-only {
+    height: 2rem;
   }
-  @include for-tablet-portrait-up{
-      height: 2.3rem;
+  @include for-tablet-portrait-up {
+    height: 2.3rem;
   }
 }
 
@@ -59,58 +66,58 @@
   font-weight: bold;
   padding: 0.2rem 0.8rem;
   text-decoration: none;
-  @include for-phone-only{
-    height: 1.0rem;
+  @include for-phone-only {
+    height: 1rem;
     border-radius: 3px;
     margin-right: 0.5em;
     font-size: 0.9em;
     padding: 0.1em;
-   }
+  }
 
-   @include for-tablet-portrait-up{
-    height: 1.0rem;
+  @include for-tablet-portrait-up {
+    height: 1rem;
     border-radius: 3px;
     margin-right: 0.5em;
     font-size: 0.9em;
     padding: 0.1em;
-   }
+  }
 
-   @include for-tablet-landscape-up{
-       margin-right: 0.5rem;
-   }
+  @include for-tablet-landscape-up {
+    margin-right: 0.5rem;
+  }
 }
 #navbarupload:hover {
   color: #e31e98;
 }
 
 #navbardownload {
-    box-shadow: inset 0px 1px 0px 0px #ffffff;
-    background: white;
-    border: 1px solid #dcdcdc;
-    border-radius: 5px;
-    display: inline-block;
-    color: #666666;
-    font-weight: bold;
-    padding: 0.2rem 0.8rem;
-    text-decoration: none;
-  @include for-phone-only{
-    height: 1.0rem;
+  box-shadow: inset 0px 1px 0px 0px #ffffff;
+  background: white;
+  border: 1px solid #dcdcdc;
+  border-radius: 5px;
+  display: inline-block;
+  color: #666666;
+  font-weight: bold;
+  padding: 0.2rem 0.8rem;
+  text-decoration: none;
+  @include for-phone-only {
+    height: 1rem;
     border-radius: 3px;
     margin-right: 0.5em;
     font-size: 0.9em;
     padding: 0.1em;
   }
-  @include for-tablet-portrait-up{
-    height: 1.0rem;
+  @include for-tablet-portrait-up {
+    height: 1rem;
     border-radius: 3px;
     margin-right: 0.5em;
     font-size: 0.9em;
     padding: 0.1em;
-   }
+  }
 }
 #navbardownload:hover {
-    color: #e31e98;
-  }
+  color: #e31e98;
+}
 
 #rightnav {
   margin-right: 1.3rem;
