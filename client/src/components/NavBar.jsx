@@ -15,7 +15,11 @@ function NavBar() {
         <NavLink id="navbarupload" to="/upload">
           Upload Results{" "}
         </NavLink>
-        <a id="navbardownload" href="https://www.npmjs.com/" target="blank">
+        <a
+          id="navbardownload"
+          href="https://www.npmjs.com/package/chaosqoala"
+          target="blank"
+        >
           Download ChaosQoaLa
         </a>
       </div>

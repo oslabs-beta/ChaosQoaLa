@@ -37,7 +37,7 @@ function Instructions() {
           />
         </div>
       </div>
-      <a href="https://www.npmjs.com/" target="blank">
+      <a href="https://www.npmjs.com/package/chaosqoala" target="blank">
         <button id="download">Download</button>
       </a>
       <button id="uploadlink">
