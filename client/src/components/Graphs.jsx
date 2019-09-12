@@ -36,9 +36,8 @@ class Graphs extends Component {
         }
       ]
     }; 
-    console.log('props',  this.props);
     return (
-      <div className="App">
+      <div>
         <h2>ChaosQoaLa Experiment Results</h2>
         <SteadyStateChart
           steadyStateChartData={steadyStateChartConfig}
