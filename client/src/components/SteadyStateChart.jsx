@@ -6,12 +6,12 @@ class SteadyStateChart extends Component {
     super(props);
   }
 
-  static defaultProps = {
-    displayTitle: true,
-    displayLegend: true,
-    legendPosition: 'right',
-    location: 'City'
-  }
+  // static defaultProps = {
+  //   displayTitle: true,
+  //   displayLegend: true,
+  //   legendPosition: 'right',
+  //   location: 'City'
+  // }
 
   render() {
     return (
