@@ -44,7 +44,6 @@ body {
 
   @include for-phone-only {
     display: flex;
-    border: 5px solid green;
   }
 
   @include for-tablet-portrait-up {
@@ -53,8 +52,6 @@ body {
 
   @include for-phone-only {
     display: flex;
-    //max-width: 100%;
-    border: 2px solid lawngreen;
   }
 
   #mainpglogo {
