@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 function Main() {
   return (
     <div id="main">
-      {/* <img id='mainpglogo'src='https://cqlimage.s3-us-west-1.amazonaws.com/ChaosQoaLa.png'></img> */}
       <p id="title">
         <img
           id="mainqoala"

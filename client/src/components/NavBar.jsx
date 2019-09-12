@@ -7,10 +7,11 @@ import { NavLink } from "react-router-dom";
 function NavBar() {
   return (
     <div id="navbar">
+      <NavLink to='/'>
       <img
         id="navBarQL"
-        src="https://cqlimage.s3-us-west-1.amazonaws.com/AngryKoala2.png"
-      />
+        src="https://cqlimage.s3-us-west-1.amazonaws.com/AngryKoala2.png"/>
+      </NavLink>
       <div id="rightnav">
         <NavLink id="navbarupload" to="/upload">
           Upload Results{" "}
