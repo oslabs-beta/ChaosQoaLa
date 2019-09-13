@@ -5,12 +5,15 @@
   border-width: 10px;
   text-align: center;
   text-transform: capitalize;
-  color: rgb(132, 0, 255);
+  color: rgb(187, 20, 151);
   font-family: Verdana, Geneva, Tahoma, sans-serif ;
   font-size: 15px;
   font-weight: bold;
+  background-color: rgb(0, 0, 0);
 }
 
-.wrap {
-  margin: auto;
+.cq-file-upload:hover {
+  border-color: black;
+  background-color: rgb(187, 20, 151);
+  color: black;
 }
