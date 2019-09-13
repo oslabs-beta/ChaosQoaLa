@@ -13,7 +13,7 @@ function FileUpload() {
       // Do whatever you want with the file contents
       const binaryStr = reader.result;
       // aws lambda end point
-      fetch('https://api.lovechaos.net/transform/logs/', {        
+      fetch('https://api.chaosqoala.io/transform/logs/', {        
         method: 'POST',
         mode: 'cors',
         cache: 'no-cache',
