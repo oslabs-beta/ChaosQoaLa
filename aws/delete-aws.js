@@ -9,7 +9,7 @@ const awsVars = require('./common-aws');
     const apiExists = await chaosDeployer.stackExists(awsVars.API_STACK_NAME);
 
     if (s3Exists) {
-      await chaosDeployer.deleteS3Objects(awsVars.WEBSITE_S3_BUCKET);
+      await chaosDeployer.deleteS3Objects(awsVars.DOMAIN_NAME);
       await chaosDeployer.deleteS3Objects(awsVars.LAMBDA_S3_BUCKET);
       await chaosDeployer.deleteStack(awsVars.S3_STACK_NAME);
     }

@@ -14,13 +14,15 @@ Parameters:
   regionHostedZoneId:
     Description: The AWS region hosted zone id
     Type: String
-
+  chaosDomainApi:
+    Description: Name of the lambda end point i.e api.example.com
+    Type: String
 
 Resources:
   customDomainForAPI:
     Type: AWS::ApiGateway::DomainName
     Properties:  
-      DomainName: "api.chaosqoala.io"
+      DomainName: !Ref chaosDomainApi
       EndpointConfiguration:
           Types: 
             - REGIONAL
@@ -94,7 +96,7 @@ Resources:
       - "apiGateway"
     Properties: 
       BasePath: "transform"
-      DomainName: "api.chaosqoala.io"
+      DomainName: !Ref chaosDomainApi
       RestApiId: !Ref "apiGateway"
   
   route53RecordSet:
@@ -107,7 +109,7 @@ Resources:
         EvaluateTargetHealth: false
         HostedZoneId: 
           Ref: regionHostedZoneId
-      Name: "api.chaosqoala.io"
+      Name: !Ref chaosDomainApi
       HostedZoneId:
         Ref: customHostedZoneId
       Type: "A"

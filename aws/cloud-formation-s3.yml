@@ -1,10 +1,10 @@
 AWSTemplateFormatVersion: 2010-09-09
 Parameters:
-  chaosWebsiteS3Bucket:
-    Description: Name of the WWW bucket
-    Type: String
   chaosLambdaS3Bucket:
     Description: Name of the S3 lambda bucket
+    Type: String
+  chaosDomain:
+    Description: Name of the domain to host on i.e example.com
     Type: String
 Mappings:
   RegionMap:
@@ -51,7 +51,7 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: 
-        Ref: chaosWebsiteS3Bucket
+        Ref: chaosDomain
       AccessControl: PublicRead
       WebsiteConfiguration:
         IndexDocument: index.html
@@ -61,7 +61,7 @@ Resources:
     Properties:
       BucketName: !Sub
           - www.${Domain}
-          - Domain: chaosqoala.io
+          - Domain: !Ref chaosDomain
       AccessControl: BucketOwnerFullControl
       WebsiteConfiguration:
         RedirectAllRequestsTo:
@@ -71,17 +71,19 @@ Resources:
     Properties:
       HostedZoneName: !Sub 
           - ${Domain}.
-          - Domain: chaosqoala.io
+          - Domain: !Ref chaosDomain
       Comment: Zone apex alias.
       RecordSets:
       - 
-        Name: www.chaosqoala.io
+        Name:  !Sub
+          - www.${Domain}
+          - Domain: !Ref chaosDomain
         Type: A
         AliasTarget:
           HostedZoneId: !FindInMap [ RegionMap, !Ref 'AWS::Region', S3hostedzoneID]
           DNSName: !FindInMap [ RegionMap, !Ref 'AWS::Region', websiteendpoint]
       - 
-        Name: chaosqoala.io
+        Name: !Ref chaosDomain
         Type: A
         AliasTarget:
           HostedZoneId: !FindInMap [ RegionMap, !Ref 'AWS::Region', S3hostedzoneID]
