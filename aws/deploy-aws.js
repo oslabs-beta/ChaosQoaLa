@@ -10,20 +10,20 @@ const awsVars = require('./common-aws');
 
     const s3CreationParameters = [
       {
-        ParameterKey: 'chaosWebsiteS3Bucket',
-        ParameterValue: awsVars.WEBSITE_S3_BUCKET,
+        ParameterKey: 'chaosDomain',
+        ParameterValue: awsVars.DOMAIN_NAME,
       },
       {
         ParameterKey: 'chaosLambdaS3Bucket',
         ParameterValue: awsVars.LAMBDA_S3_BUCKET,
       }];
 
-    await chaosDeployer.createStack(awsVars.S3_STACK_NAME, awsVars.S3_STACK_TEMPLATE_FILE_PATH, s3CreationParameters);
+    await chaosDeployer.createStack(awsVars.S3_STACK_NAME, './cloud-formation-s3.yml', s3CreationParameters);
 
     const indexContents = fs.readFileSync('../client/index.html', 'utf8');
     const bundleContents = fs.readFileSync('../client/build/bundle.js', 'utf8');
-    await chaosDeployer.createObject(awsVars.WEBSITE_S3_BUCKET, 'index.html', indexContents, {ContentType: "text/html", ACL: "public-read"});
-    await chaosDeployer.createObject(awsVars.WEBSITE_S3_BUCKET, 'build/bundle.js', bundleContents, {ContentType: "text/javascript", ACL: "public-read"});
+    await chaosDeployer.createObject(awsVars.DOMAIN_NAME, 'index.html', indexContents, {ContentType: "text/html", ACL: "public-read"});
+    await chaosDeployer.createObject(awsVars.DOMAIN_NAME, 'build/bundle.js', bundleContents, {ContentType: "text/javascript", ACL: "public-read"});
 
     const zip = new AdmZip();
     zip.addLocalFile('./lambda.js');
@@ -35,8 +35,9 @@ const awsVars = require('./common-aws');
       { ParameterKey: 'regionalCertificateArn', ParameterValue: awsVars.REGIONAL_CERTIFICATE_ARN,},
       { ParameterKey: 'customHostedZoneId', ParameterValue: awsVars.CUSTOM_DOMAIN_HOSTED_ZONE_ID,},
       { ParameterKey: 'regionHostedZoneId', ParameterValue: awsVars.REGION_HOSTED_ZONE_ID,},
+      { ParameterKey: 'chaosDomainApi', ParameterValue: awsVars.API_END_POINT,},
     ];
-    await chaosDeployer.createStack(awsVars.API_STACK_NAME, awsVars.API_STACK_TEMPLATE_FILE_PATH, apiCreationParameters);
+    await chaosDeployer.createStack(awsVars.API_STACK_NAME, './cloud-formation-lambda-api.yml', apiCreationParameters);
     
   } catch (err) {
     console.log(err);
