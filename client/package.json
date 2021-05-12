@@ -7,7 +7,7 @@
     "axios": "^0.19.0",
     "babel": "^6.23.0",
     "bluebird": "^3.5.5",
-    "chart.js": "^2.8.0",
+    "chart.js": "^2.9.4",
     "express": "^4.17.1",
     "file-type": "^12.3.0",
     "multiparty": "^4.2.1",
